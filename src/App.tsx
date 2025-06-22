@@ -314,14 +314,14 @@ const App = () => {
             </div>
 
             <div className="flex items-center gap-4">
-                <a
+                {/* <a
                   href="/Syed M. Affan - BSc. Computer Engineering - Resume.pdf"
                   download
                   className="animated-gradient-btn inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md"
                 >
                   <Download size={18} />
                   Resume
-                </a>
+                </a> */}
               <div className="md:hidden">
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -414,7 +414,7 @@ const App = () => {
               <Code size={20} />
               View My Work
             </button>
-            <a
+            {/* <a
               href="/Syed M. Affan - BSc. Computer Engineering - Resume.pdf"
               download
                 className="animated-gradient-btn rounded-lg px-6 py-3 text-base font-semibold whitespace-nowrap flex items-center justify-center gap-2"
@@ -422,7 +422,7 @@ const App = () => {
             >
               <Download size={20} />
                 Resume
-            </a>
+            </a> */}
           </div>
 
             <div className="flex justify-center space-x-4 md:space-x-10 mb-12">
@@ -1087,15 +1087,15 @@ const App = () => {
               </div>
 
               <div className="mt-8">
-                <h4 className="font-semibold mb-4">Download Resume</h4>
-                <a
+                {/* <h4 className="font-semibold mb-4">Download Resume</h4> */}
+                {/* <a
                   href="/Syed M. Affan - BSc. Computer Engineering - Resume.pdf"
                   download
                   className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
                 >
                   <Download size={20} />
                   Download PDF
-                </a>
+                </a> */}
               </div>
             </div>
 
@@ -1152,7 +1152,7 @@ const App = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
                 <p className="text-gray-700">
-                  © 2025 Syed Affan. All rights reserved.
+                  Made with 🤍 by Afft
               </p>
             </div>
             <div className="flex space-x-6">
