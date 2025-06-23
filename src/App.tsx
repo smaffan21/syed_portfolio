@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Github, Linkedin, Mail, Download, ExternalLink, Award, Code, Briefcase, User, Home, Phone, MapPin, Calendar, ChevronDown, Brain, Database, Server, Cloud, Terminal, BookOpen, FlaskConical, GitBranch, Globe, BarChart2, Cpu, CheckCircle } from 'lucide-react';
-import { SiTensorflow, SiPytorch, SiHuggingface, SiScikitlearn, SiOpenai, SiPython, SiCplusplus, SiJavascript, SiTypescript, SiC, SiNumpy, SiPandas, SiJupyter, SiReact, SiNodedotjs, SiHtml5, SiCss3, SiDocker, SiAmazon, SiKubernetes, SiLinux, SiMongodb, SiPostgresql, SiGit } from 'react-icons/si';
+import { SiTensorflow, SiPytorch, SiHuggingface, SiScikitlearn, SiOpenai, SiPython, SiCplusplus, SiJavascript, SiTypescript, SiC, SiNumpy, SiPandas, SiJupyter, SiReact, SiNodedotjs, SiHtml5, SiCss3, SiDocker, SiAmazon, SiKubernetes, SiLinux, SiMongodb, SiPostgresql, SiGit, SiWhatsapp } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 import MorphingBackground from './MorphingBackground';
 import GlassCard from './GlassCard';
@@ -188,6 +188,7 @@ const App = () => {
   const [headerFill, setHeaderFill] = useState(0); // 0 to 1
   const headerTimer = useRef<any>(null);
   const headerFillRAF = useRef<any>(null);
+  const [expandedCompetitionImage, setExpandedCompetitionImage] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
@@ -307,7 +308,9 @@ const App = () => {
                     }`}
                   >
                     <Icon size={16} />
-                    {label}
+                    {id === 'creative' ? (
+                      <span style={{ textDecoration: 'line-through', textDecorationColor: '#dc2626', textDecorationThickness: '2px' }}>{label}</span>
+                    ) : label}
                   </button>
                 ))}
               </div>
@@ -479,35 +482,35 @@ const App = () => {
           </div>
               <div className="flex flex-col gap-8 items-center w-full">
             <div className="w-full">
-                  <h3 className="text-2xl font-bold mb-4">Background</h3>
+                  <h3 className="text-2xl font-bold mb-4  text-gray-100">Background</h3>
                   <p className="text-gray-200 mb-4 bg-gray-900/60 rounded-lg px-4 py-2">
                 Currently pursuing a Bachelor's degree in Computer Engineering, I'm deeply passionate about 
                 the intersection of technology and innovation. My academic journey has equipped me with 
                 strong foundations in software development, AI/ML, and system design.
               </p>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-6">
                     <div className="flex items-center gap-2 font-semibold">
                   <MapPin size={16} className="text-blue-600" />
-                  <span className="text-sm">Abu Dhabi, UAE (Flexible)</span>
+                  <span className="text-sm text-gray-200">Abu Dhabi, UAE (Flexible)</span>
                 </div>
                     <div className="flex items-center gap-2 font-semibold">
                   <Calendar size={16} className="text-blue-600" />
-                  <span className="text-sm">Available for Opportunities</span>
+                  <span className="text-sm text-gray-200">Available for Opportunities</span>
                 </div>
               </div>
                   <div className="mt-8">
-                    <h3 className="text-2xl font-bold mb-4">Education</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-gray-100">Education</h3>
                     <div className="bg-gray-900/60 rounded-lg px-4 py-3 mb-2 flex items-center gap-3">
                       <img src="/ku-logo.png" alt="Khalifa University Logo" className="h-8 w-8 mr-2" />
                       <div>
                         <div className="font-bold text-lg text-white inline-block align-middle">Khalifa University</div>
                         <div className="text-gray-300 font-medium">BSc. Computer Engineering</div>
-                        <div className="text-gray-400 text-sm">2020 – 2024 &bull; Abu Dhabi, UAE</div>
+                        <div className="text-gray-400 text-sm">2021 – 2025 &bull; Abu Dhabi, UAE</div>
             </div>
                     </div>
                   </div>
                   <div className="mt-8">
-                    <h3 className="text-2xl font-bold mb-4">Skills</h3>
+                    <h3 className="text-2xl font-bold mb-4  text-gray-100">Skills</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {/* Programming Languages */}
                       <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
@@ -648,7 +651,7 @@ const App = () => {
                   </div>
                   <div className="p-6 flex-1 flex flex-col relative">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-green-600 transition-colors">GreenCart</h3>
+                      <h3 className="text-xl font-bold group-hover:text-green-600 transition-colors text-gray-200">GreenCart</h3>
                       <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-semibold">Flutter / Python</span>
                     </div>
                     <div className="mt-2">
@@ -661,11 +664,11 @@ const App = () => {
                     <p className="text-gray-700 mb-2 text-sm leading-relaxed">Utilized Flutter for front-end, Python & Flask for back-end and integrated Google's Gemini & various APIs using JS.</p>
                     <p className="text-gray-700 mb-4 text-sm leading-relaxed">Enabled real-time product analysis and sustainability insights, aligning with 5 SDGs and the UAE's Green Agenda.</p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Flutter</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Gemini</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">REST API</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flutter</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Gemini</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">REST API</span>
                     </div>
                   </div>
                 </a>
@@ -677,7 +680,7 @@ const App = () => {
                   </div>
                   <div className="p-6 flex-1 flex flex-col relative">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors">Socia</h3>
+                      <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors text-gray-200">Socia</h3>
                       <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-semibold">React Native / Python</span>
                     </div>
                     <div className="mt-2">
@@ -689,11 +692,11 @@ const App = () => {
                     <p className="text-gray-700 mb-2 text-sm leading-relaxed">Implemented a cross-platform mobile app using React Native and Flask-Python backend integrated with Azure AI.</p>
                     <p className="text-gray-700 mb-4 text-sm leading-relaxed">Designed 4 realistic practice environments, improving user engagement and public speaking proficiency by 70%.</p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Expo</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">React Native</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Azure</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Expo</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React Native</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Azure</span>
                     </div>
                   </div>
                 </a>
@@ -705,7 +708,7 @@ const App = () => {
                   </div>
                   <div className="p-6 flex-1 flex flex-col relative">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-purple-600 transition-colors">F.A.L.C.O.N. Flood Monitoring System</h3>
+                      <h3 className="text-xl font-bold group-hover:text-purple-600 transition-colors text-gray-200">F.A.L.C.O.N. Flood Monitoring System</h3>
                       <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full font-semibold">Python / CNN</span>
                 </div>
                     <div className="mt-2">
@@ -717,12 +720,12 @@ const App = () => {
                     <p className="text-gray-700 mb-2 text-sm leading-relaxed">Deployed a YOLOv9 model for real-time flood segmentation on satellite imagery using DEMs for flood volume.</p>
                     <p className="text-gray-700 mb-4 text-sm leading-relaxed">Developed a cloud pipeline for scalable flood detection and visualization, supporting urban disaster planning in the UAE.</p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">CNN</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Torch</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">React</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">OpenAI</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">CNN</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Torch</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">OpenAI</span>
           </div>
         </div>
                 </a>
@@ -734,7 +737,7 @@ const App = () => {
                   </div>
                   <div className="p-6 flex-1 flex flex-col relative">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-yellow-600 transition-colors">AuroAI</h3>
+                      <h3 className="text-xl font-bold group-hover:text-yellow-600 transition-colors text-gray-200">Auro</h3>
                       <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-semibold">React Native / Python</span>
                     </div>
                     <div className="mt-2">
@@ -747,12 +750,12 @@ const App = () => {
                     <p className="text-gray-700 mb-2 text-sm leading-relaxed">Built TensorFlow emotion-recognition pipeline integrated via Azure Cognitive Service.</p>
                     <p className="text-gray-700 mb-4 text-sm leading-relaxed">Developed Node.js WebSocket speech-to-text microservice delivering rapid feedback.</p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Expo</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">TensorFlow</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">React Native</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Azure ML</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Expo</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">TensorFlow</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React Native</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Azure ML</span>
                     </div>
                   </div>
                 </a>
@@ -764,7 +767,7 @@ const App = () => {
                   </div>
                   <div className="p-6 flex-1 flex flex-col relative">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-cyan-600 transition-colors">UAVMS: UTM Drone Identification & Disambiguation</h3>
+                      <h3 className="text-xl font-bold group-hover:text-cyan-600 transition-colors text-gray-200">UAVMS: UTM Drone Identification & Disambiguation</h3>
                       <span className="px-2 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full font-semibold">Python / YOLOv8</span>
                     </div>
                     <div className="mt-2">
@@ -777,11 +780,11 @@ const App = () => {
                     <p className="text-gray-700 mb-2 text-sm leading-relaxed">Engineered VIDTrack (Python) for real-time comparison of observed visual coordinates against reported positions.</p>
                     <p className="text-gray-700 mb-4 text-sm leading-relaxed">Created a comprehensive solution with a custom 50k+ image dataset and a GUI for robust indoor UTM monitoring.</p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">YOLOv8</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">OpenCV</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">ZED SDK</span>
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">PX4</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">YOLOv8</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">OpenCV</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">ZED SDK</span>
+                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">PX4</span>
                   </div>
                 </div>
                 </a>
@@ -810,10 +813,11 @@ const App = () => {
                 participants: '14 teams',
                 color: 'gold',
                 logo: '/zu-logo.png',
-                url: '#' // Replace with actual URL
+                image: '/Pictures/zu-award.jpg',
+                url: 'https://www.linkedin.com/feed/update/urn:li:activity:7302690855050448896/'
               },
               {
-                title: 'NYUAD Slush\'D AI Hackathon',
+                title: "NYUAD Slush'D AI Hackathon",
                 position: '1st Place',
                 date: '2025',
                 description: 'Built Socia, a public speaking aid app with real-time AI feedback on fluency, tone, and emotion.',
@@ -821,7 +825,8 @@ const App = () => {
                 participants: '104 teams',
                 color: 'gold',
                 logo: '/nyu-logo.png',
-                url: '#' // Replace with actual URL
+                image: '/Pictures/nyuad-award.jpg',
+                url: 'https://www.linkedin.com/feed/update/urn:li:activity:7297498834266394624/'
               },
               {
                 title: 'BCG Platinion Hackathon - Middle East',
@@ -832,7 +837,8 @@ const App = () => {
                 participants: 'Regional',
                 color: 'gold',
                 logo: '/bcg-logo.png',
-                url: '#' // Replace with actual URL
+                image: '/Pictures/bcg-award.jpeg',
+                url: 'https://www.linkedin.com/feed/update/urn:li:activity:7271764757626408960/'
               },
               {
                 title: 'Smart Mobile Application Contest',
@@ -843,7 +849,8 @@ const App = () => {
                 participants: '13 teams',
                 color: 'gold',
                 logo: '/ku-logo.png',
-                url: '#' // Replace with actual URL
+                image: '/Pictures/smac-award.jpeg',
+                url: 'https://www.linkedin.com/feed/update/urn:li:activity:7256537674499416064/'
               },
               {
                 title: 'MOExEPG Mail Robotics Competition',
@@ -854,7 +861,8 @@ const App = () => {
                 participants: 'National',
                 color: 'silver',
                 logo: '/moe-logo.jpg',
-                url: '#' // Replace with actual URL
+                image: '/Pictures/epg-award.jpeg',
+                url: 'https://www.linkedin.com/feed/update/urn:li:activity:7271764757626408960/'
               },
               {
                 title: 'IEEE UAE Section Student Day',
@@ -865,7 +873,8 @@ const App = () => {
                 participants: '100+ projects',
                 color: 'bronze',
                 logo: '/ieee-logo.png',
-                url: '#' // Replace with actual URL
+                image: '/Pictures/ieee-award.jpeg',
+                url: 'https://www.linkedin.com/feed/update/urn:li:activity:7335596394843402240/'
               },
               {
                 title: 'KU Film Festival',
@@ -876,7 +885,8 @@ const App = () => {
                 participants: 'Festival',
                 color: 'purple',
                 logo: '/ku-logo.png',
-                url: '#' // Replace with actual URL
+                image: '/Pictures/theaterclub-award.png',
+                url: 'https://www.youtube.com/watch?v=U3Dp8hJp2_Y'
               },
             ].map((competition, index) => {
               const competitionStyles: { [key: string]: any } = {
@@ -913,24 +923,33 @@ const App = () => {
               };
 
               return (
-                <a 
-                  key={index} 
-                  href={competition.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group block rounded-xl p-6 flex items-start space-x-6 ${styles.container} cursor-pointer transition-all duration-300 ease-in-out`}
-                >
-                  <div className={`hidden md:flex flex-shrink-0 w-32 h-32 rounded-lg items-center justify-center shadow-md ${styles.iconBg}`}>
-                    <CheckCircle size={56} className={styles.iconColor}/>
+                <div key={index} className={`group block rounded-xl p-6 flex items-start space-x-6 ${styles.container} transition-all duration-300 ease-in-out`}>
+                  <div className="hidden md:flex flex-col flex-shrink-0 w-32 h-32 rounded-lg items-center justify-center gap-2">
+                    {competition.image && (
+                      <img
+                        src={competition.image}
+                        alt={`${competition.title} award`}
+                        className="rounded-md object-cover max-h-16 w-auto mb-1 border border-gray-300 competition-award-img cursor-zoom-in"
+                        style={{background:'#fff'}}
+                        onClick={e => {
+                          e.stopPropagation();
+                          setExpandedCompetitionImage(competition.image);
+                        }}
+                      />
+                    )}
+                    <div className={`w-10 h-10 rounded-lg p-1 flex-shrink-0 flex items-center justify-center shadow-sm`} style={{ backgroundColor: 'white' }}>
+                      <img src={competition.logo} alt={`${competition.title} logo`} className="max-w-full max-h-full object-contain" />
+                    </div>
                   </div>
-                  <div className="flex-1">
+                  <a
+                    href={competition.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 cursor-pointer"
+                    style={{ textDecoration: 'none' }}
+                  >
                     <div className="flex justify-between items-start">
                       <div className="flex items-center space-x-4">
-                        {competition.logo && (
-                           <div className="w-10 h-10 rounded-lg p-1 flex-shrink-0 flex items-center justify-center shadow-sm" style={{ backgroundColor: 'white' }}>
-                            <img src={competition.logo} alt={`${competition.title} logo`} className="max-w-full max-h-full object-contain" />
-                           </div>
-                        )}
                         <div>
                           <h3 className="text-gray-300 font-semibold">{competition.title}</h3>
                           <p className={`text-lg font-bold ${styles.positionColor}`}>{competition.position}</p>
@@ -943,8 +962,8 @@ const App = () => {
                       <span className="award-tag">{competition.achievement}</span>
                       <span className="award-tag award-participants">{competition.participants}</span>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               );
             })}
           </div>
@@ -955,83 +974,42 @@ const App = () => {
         <section id="creative" className="py-10">
           <GlassCard>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">Creative Gallery</h2>
-                <p className="text-lg text-gray-300">A vibrant showcase of my creative pursuits</p>
-          </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <button onClick={() => setOpenGallery('photography')} className="group block rounded-2xl overflow-hidden shadow-xl bg-[#a21caf] hover:scale-105 transition-transform duration-300 border-4 border-pink-500 focus:outline-none">
-                  <div className="aspect-video bg-pink-400 flex items-center justify-center">
-                    <svg width="48" height="48" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#EC4899"/><path d="M8 12l2 2 4-4" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <div className="flex flex-col items-center justify-center min-h-[300px] py-16">
+            <div className="relative mb-8 flex flex-col items-center">
+              {/* Wooden barrier / red tape effect */}
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
+                <div style={{
+                  width: '220px',
+                  height: '32px',
+                  background: 'repeating-linear-gradient(135deg, #b91c1c 0 20px, #fff 20px 40px)',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                  transform: 'rotate(-8deg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px solid #b91c1c',
+                  fontWeight: 700,
+                  color: '#fff',
+                  fontSize: '1.1rem',
+                  letterSpacing: '0.1em',
+                  textShadow: '0 1px 4px #000',
+                  padding: '0 16px',
+                  userSelect: 'none',
+                }}>
+                  🚧 UNDER CONSTRUCTION 🚧
                 </div>
-                  <div className="p-6 text-center bg-gray-900">
-                    <h3 className="text-xl font-bold mb-2 text-pink-300">Photography</h3>
-                    <p className="text-gray-300">Explore my best shots and photo stories</p>
-                  </div>
-                </button>
-                <button onClick={() => setOpenGallery('videography')} className="group block rounded-2xl overflow-hidden shadow-xl bg-[#7c3aed] hover:scale-105 transition-transform duration-300 border-4 border-purple-500 focus:outline-none">
-                  <div className="aspect-video bg-purple-400 flex items-center justify-center">
-                    <svg width="48" height="48" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#8B5CF6"/><path d="M8 12l2 2 4-4" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </div>
-                  <div className="p-6 text-center bg-gray-900">
-                    <h3 className="text-xl font-bold mb-2 text-purple-300">Videography</h3>
-                    <p className="text-gray-300">Short films, edits, and creative videos</p>
               </div>
-                </button>
-                <button onClick={() => setOpenGallery('design')} className="group block rounded-2xl overflow-hidden shadow-xl bg-[#1d4ed8] hover:scale-105 transition-transform duration-300 border-4 border-blue-500 focus:outline-none">
-                  <div className="aspect-video bg-blue-400 flex items-center justify-center">
-                    <svg width="48" height="48" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#3B82F6"/><path d="M8 12l2 2 4-4" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </div>
-                  <div className="p-6 text-center bg-gray-900">
-                    <h3 className="text-xl font-bold mb-2 text-blue-300">Design Work</h3>
-                    <p className="text-gray-300">UI/UX, branding, and digital art</p>
-                  </div>
-                </button>
-              </div>
-              <div className="text-center mt-12">
-                <a href="https://www.behance.net/your-behance" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-lg hover:from-purple-600 hover:to-blue-600 transition-all text-lg font-semibold">
-                  <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.6 17.2C14.5333 16.8 15.0667 16.0667 15.0667 15.0667C15.0667 13.3333 13.6 12.8 11.7333 12.8H7.2V22.1333H11.7333C13.6 22.1333 15.0667 21.3333 15.0667 19.6C15.0667 18.6667 14.5333 17.8667 13.6 17.2ZM9.06667 14.4H11.6C12.5333 14.4 13.0667 14.8 13.0667 15.4667C13.0667 16.1333 12.5333 16.5333 11.6 16.5333H9.06667V14.4ZM11.8667 20.5333H9.06667V18.1333H11.8667C12.8 18.1333 13.3333 18.5333 13.3333 19.3333C13.3333 20.1333 12.8 20.5333 11.8667 20.5333ZM24.8 17.3333C23.7333 17.3333 22.9333 17.7333 22.6667 18.6667H26.1333C26.1333 18.6667 26.1333 17.3333 24.8 17.3333ZM22.6667 19.6C22.8 20.4 23.4667 20.6667 24.1333 20.6667C24.9333 20.6667 25.3333 20.2667 25.3333 19.7333H27.0667C26.9333 21.0667 25.8667 21.7333 24.1333 21.7333C22.1333 21.7333 21.0667 20.2667 21.0667 18.6667C21.0667 17.0667 22.1333 15.7333 24.1333 15.7333C25.8667 15.7333 26.9333 16.9333 26.9333 18.6667V19.0667H22.6667V19.6ZM20.2667 13.0667H25.6V14.1333H20.2667V13.0667Z" fill="white"/>
-                  </svg>
-                  More on my Behance Profile
-                </a>
-              </div>
-              {openGallery && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm">
-                  <div className="relative w-full max-w-3xl mx-auto rounded-2xl bg-gray-900 shadow-2xl p-6 flex flex-col">
-                    <button onClick={() => setOpenGallery(null)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold focus:outline-none">&times;</button>
-                    <h3 className="text-2xl font-bold mb-4 text-center text-white">
-                      {openGallery === 'photography' && 'Photography Gallery'}
-                      {openGallery === 'videography' && 'Videography Gallery'}
-                      {openGallery === 'design' && 'Design Gallery'}
-                    </h3>
-                    <div className="flex gap-4 overflow-x-auto pb-2">
-                      {openGallery === 'photography' && [
-                        '/creative/photography/photo1.jpg',
-                        '/creative/photography/photo2.jpg',
-                        '/creative/photography/photo3.jpg',
-                      ].map((src, i) => (
-                        <img key={i} src={src} alt="Photography work" className="rounded-lg shadow-lg w-64 h-40 object-cover" />
-                      ))}
-                      {openGallery === 'videography' && [
-                        '/creative/videography/video1.jpg',
-                        '/creative/videography/video2.jpg',
-                        '/creative/videography/video3.jpg',
-                      ].map((src, i) => (
-                        <img key={i} src={src} alt="Videography work" className="rounded-lg shadow-lg w-64 h-40 object-cover" />
-                      ))}
-                      {openGallery === 'design' && [
-                        '/creative/design/design1.jpg',
-                        '/creative/design/design2.jpg',
-                        '/creative/design/design3.jpg',
-                      ].map((src, i) => (
-                        <img key={i} src={src} alt="Design work" className="rounded-lg shadow-lg w-64 h-40 object-cover" />
-            ))}
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-100 relative" style={{ marginTop: '32px' }}>
+                
+              </h2>
+            </div>
+            <p className="text-lg text-gray-300 text-center max-w-xl">
+              This section is currently under construction.<br />
+              Stay tuned for a showcase of creative work soon!
+            </p>
           </div>
         </div>
-                </div>
-              )}
-            </div>
           </GlassCard>
       </section>
 
@@ -1043,105 +1021,47 @@ const App = () => {
               Let's discuss opportunities, collaborations, or just connect!
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="flex justify-center">
             <div>
-              <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                    <Mail className="text-blue-600" size={20} />
+              <h3 className="text-xl font-semibold mb-6 text-center">Contact Information</h3>
+              <div className="space-y-4 text-center">
+                <div className="flex items-center gap-3 justify-center transition-transform duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+                  <Mail className="text-blue-600" size={20} />
                   <a
                     href="mailto:smaffan21@gmail.com"
-                      className="text-gray-700 hover:text-blue-600"
+                    className="text-gray-700 hover:text-blue-600"
                   >
                     smaffan21@gmail.com
                   </a>
                 </div>
-                <div className="flex items-center gap-3">
-                    <Linkedin className="text-blue-600" size={20} />
+                <div className="flex items-center gap-3 justify-center transition-transform duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+                  <Linkedin className="text-blue-600" size={20} />
                   <a
                     href="https://www.linkedin.com/in/syed-m-affan/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                      className="text-gray-700 hover:text-blue-600"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-700 hover:text-blue-600"
                   >
                     linkedin.com/in/syed-m-affan
                   </a>
                 </div>
-                <div className="flex items-center gap-3">
-                    <a
-                      href="https://wa.me/971507329827"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-green-500 hover:text-green-600 flex items-center gap-2"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="20" height="20"><path d="M12.004 2.003a9.994 9.994 0 0 0-8.77 14.98l-1.18 4.32a1 1 0 0 0 1.22 1.22l4.32-1.18a9.994 9.994 0 1 0 4.41-19.34zm0 18.002a7.99 7.99 0 0 1-4.09-1.13l-.29-.17-2.56.7.7-2.56-.17-.29A7.99 7.99 0 1 1 20 12.003a7.98 7.98 0 0 1-7.996 8.002zm4.36-6.19c-.24-.12-1.41-.7-1.63-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.11-.49.12-.12.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54z"/></svg>
-                      WhatsApp
-                    </a>
-                    <span className="text-gray-700">+971 50 732 9827</span>
+                <div className="flex items-center gap-3 justify-center">
+                  <a
+                    href="https://wa.me/971507329827"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-500 hover:text-green-600 flex items-center gap-2 transition-transform duration-200 hover:scale-105 hover:shadow-lg cursor-pointer"
+                  >
+                    <SiWhatsapp size={20} />
+                    WhatsApp
+                  </a>
+                  <span className="text-gray-700 select-text">+971 50 732 9827</span>
                 </div>
-                <div className="flex items-center gap-3">
-                    <MapPin className="text-blue-600" size={20} />
-                    <span className="text-gray-700">United Arab Emirates</span>
+                <div className="flex items-center gap-3 justify-center">
+                  <MapPin className="text-blue-600" size={20} />
+                  <span className="text-gray-700">United Arab Emirates</span>
                 </div>
               </div>
-
-              <div className="mt-8">
-                {/* <h4 className="font-semibold mb-4">Download Resume</h4> */}
-                {/* <a
-                  href="/Syed M. Affan - BSc. Computer Engineering - Resume.pdf"
-                  download
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                >
-                  <Download size={20} />
-                  Download PDF
-                </a> */}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
-                    placeholder="Your message..."
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
-                >
-                  Send Message
-                </button>
-              </form>
             </div>
           </div>
         </div>
@@ -1182,6 +1102,14 @@ const App = () => {
       </footer>
     </div>
       {showSnake && <SnakeGame onClose={() => setShowSnake(false)} />}
+      {expandedCompetitionImage && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-md" onClick={() => setExpandedCompetitionImage(null)}>
+          <div className="relative bg-gray-900 rounded-2xl shadow-2xl p-4 flex flex-col items-center max-w-2xl w-full" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setExpandedCompetitionImage(null)} className="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl font-bold focus:outline-none">&times;</button>
+            <img src={expandedCompetitionImage} alt="Expanded award" className="rounded-lg max-h-[70vh] w-auto object-contain border border-gray-300" />
+          </div>
+        </div>
+      )}
     </MorphingBackground>
   );
 };
