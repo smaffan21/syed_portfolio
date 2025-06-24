@@ -326,3 +326,40 @@ html, body {
   @apply bg-gradient-to-br from-purple-900/40 via-gray-900 to-gray-900 border border-purple-800/50;
   box-shadow: 0 0 20px 4px rgba(168, 85, 247, 0.15);
 }
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animated Gradient Progress Bar */
+.animated-gradient-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  z-index: 100;
+  background: linear-gradient(90deg, #38bdf8, #a78bfa, #f472b6, #38bdf8);
+  background-size: 300% 100%;
+  animation: gradient-move 4s linear infinite;
+  transition: width 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%;}
+  100% { background-position: 100% 50%;}
+}
+
+/* Glassmorphism Footer */
+.cool-footer-glass {
+  background: rgba(24, 24, 37, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1.5px solid rgba(255,255,255,0.08);
+}

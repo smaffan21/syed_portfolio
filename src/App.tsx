@@ -5,6 +5,7 @@ import { FaJava } from 'react-icons/fa';
 import MorphingBackground from './MorphingBackground';
 import GlassCard from './GlassCard';
 import { Analytics } from '@vercel/analytics/react';
+import FadeInSection from './FadeInSection';
 
 const SnakeGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -190,6 +191,7 @@ const App = () => {
   const headerTimer = useRef<any>(null);
   const headerFillRAF = useRef<any>(null);
   const [expandedCompetitionImage, setExpandedCompetitionImage] = useState<string | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
@@ -197,15 +199,20 @@ const App = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Update scroll progress
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      setScrollProgress(progress);
+
+      // Update active section
       const sections = ['home', 'about', 'experience', 'projects', 'competitions', 'creative', 'contact'];
       const scrollPosition = window.scrollY + 100;
-
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-          
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section);
             break;
@@ -213,8 +220,8 @@ const App = () => {
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // set initial
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -281,6 +288,11 @@ const App = () => {
 
   return (
     <MorphingBackground>
+      {/* Animated Gradient Progress Bar */}
+      <div
+        className="animated-gradient-bar"
+        style={{ width: `${Math.max(3, scrollProgress * 100)}%` }}
+      ></div>
       <div className="min-h-screen transition-colors duration-300 relative text-white">
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 py-3 px-4`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -367,7 +379,8 @@ const App = () => {
         )}
       </nav>
 
-      <section id="home" className="pt-28 md:pt-28 min-h-screen flex items-center justify-center relative">
+      <FadeInSection id="home">
+        <section className="pt-28 md:pt-28 min-h-screen flex items-center justify-center relative">
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-16">
             <div className="mb-8 flex flex-col items-center relative">
               <div
@@ -472,8 +485,10 @@ const App = () => {
           </div>
         </div>
       </section>
+      </FadeInSection>
 
-        <section id="about" className="py-10">
+      <FadeInSection id="about">
+        <section className="py-10">
           <GlassCard>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-10">
@@ -516,66 +531,78 @@ const App = () => {
                     <h3 className="text-2xl font-bold mb-4  text-gray-100">Skills</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {/* Programming Languages */}
-                      <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
-                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white">Programming Languages</h4>
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center gap-2 text-white"><SiPython className="text-yellow-400" size={20}/> Python</div>
-                          <div className="flex items-center gap-2 text-white"><SiCplusplus className="text-blue-500" size={20}/> C++</div>
-                          <div className="flex items-center gap-2 text-white"><SiJavascript className="text-yellow-300" size={20}/> JavaScript</div>
-                          <div className="flex items-center gap-2 text-white"><SiTypescript className="text-blue-400" size={20}/> TypeScript</div>
-                          <div className="flex items-center gap-2 text-white"><FaJava className="text-red-500" size={20}/> Java</div>
-                          <div className="flex items-center gap-2 text-white"><SiC className="text-gray-400" size={20}/> C</div>
+                      <FadeInSection>
+                        <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
+                          <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white">Programming Languages</h4>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2 text-white"><SiPython className="text-yellow-400" size={20}/> Python</div>
+                            <div className="flex items-center gap-2 text-white"><SiCplusplus className="text-blue-500" size={20}/> C++</div>
+                            <div className="flex items-center gap-2 text-white"><SiJavascript className="text-yellow-300" size={20}/> JavaScript</div>
+                            <div className="flex items-center gap-2 text-white"><SiTypescript className="text-blue-400" size={20}/> TypeScript</div>
+                            <div className="flex items-center gap-2 text-white"><FaJava className="text-red-500" size={20}/> Java</div>
+                            <div className="flex items-center gap-2 text-white"><SiC className="text-gray-400" size={20}/> C</div>
+                          </div>
                         </div>
-                      </div>
+                      </FadeInSection>
                       {/* Machine Learning & AI */}
-                      <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
-                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Machine Learning & AI</h4>
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center gap-2 text-white"><SiTensorflow className="text-orange-500" size={20}/> TensorFlow</div>
-                          <div className="flex items-center gap-2 text-white"><SiPytorch className="text-orange-600" size={20}/> PyTorch</div>
-                          <div className="flex items-center gap-2 text-white"><SiHuggingface className="text-yellow-400" size={20}/> Hugging Face</div>
-                          <div className="flex items-center gap-2 text-white"><SiScikitlearn className="text-orange-400" size={20}/> Scikit-learn</div>
-                          <div className="flex items-center gap-2 text-white"><SiOpenai className="text-teal-400" size={20}/> OpenAI</div>
+                      <FadeInSection>
+                        <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
+                          <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Machine Learning & AI</h4>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2 text-white"><SiTensorflow className="text-orange-500" size={20}/> TensorFlow</div>
+                            <div className="flex items-center gap-2 text-white"><SiPytorch className="text-orange-600" size={20}/> PyTorch</div>
+                            <div className="flex items-center gap-2 text-white"><SiHuggingface className="text-yellow-400" size={20}/> Hugging Face</div>
+                            <div className="flex items-center gap-2 text-white"><SiScikitlearn className="text-orange-400" size={20}/> Scikit-learn</div>
+                            <div className="flex items-center gap-2 text-white"><SiOpenai className="text-teal-400" size={20}/> OpenAI</div>
+                          </div>
                         </div>
-                      </div>
+                      </FadeInSection>
                       
                       {/* Data Science & Analytics */}
-                      <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
-                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Data Science & Analytics</h4>
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center gap-2 text-white"><SiNumpy className="text-blue-400" size={20}/> NumPy</div>
-                          <div className="flex items-center gap-2 text-white"><SiPandas className="text-purple-400" size={20}/> Pandas</div>
-                          <div className="flex items-center gap-2 text-white"><SiJupyter className="text-orange-500" size={20}/> Jupyter</div>
+                      <FadeInSection>
+                        <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
+                          <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Data Science & Analytics</h4>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2 text-white"><SiNumpy className="text-blue-400" size={20}/> NumPy</div>
+                            <div className="flex items-center gap-2 text-white"><SiPandas className="text-purple-400" size={20}/> Pandas</div>
+                            <div className="flex items-center gap-2 text-white"><SiJupyter className="text-orange-500" size={20}/> Jupyter</div>
+                          </div>
                         </div>
-                      </div>
+                      </FadeInSection>
                       {/* Web Development */}
-                      <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
-                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Web Development</h4>
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center gap-2 text-white"><SiReact className="text-cyan-400" size={20}/> React</div>
-                          <div className="flex items-center gap-2 text-white"><SiNodedotjs className="text-green-500" size={20}/> Node.js</div>
-                          <div className="flex items-center gap-2 text-white"><SiHtml5 className="text-orange-500" size={20}/> HTML</div>
-                          <div className="flex items-center gap-2 text-white"><SiCss3 className="text-blue-500" size={20}/> CSS</div>
+                      <FadeInSection>
+                        <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
+                          <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Web Development</h4>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2 text-white"><SiReact className="text-cyan-400" size={20}/> React</div>
+                            <div className="flex items-center gap-2 text-white"><SiNodedotjs className="text-green-500" size={20}/> Node.js</div>
+                            <div className="flex items-center gap-2 text-white"><SiHtml5 className="text-orange-500" size={20}/> HTML</div>
+                            <div className="flex items-center gap-2 text-white"><SiCss3 className="text-blue-500" size={20}/> CSS</div>
+                          </div>
                         </div>
-                      </div>
+                      </FadeInSection>
                       {/* DevOps & Cloud */}
-                      <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
-                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white">DevOps & Cloud</h4>
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center gap-2 text-white"><SiAmazon className="text-yellow-400" size={20}/> AWS</div>
-                          <div className="flex items-center gap-2 text-white"><SiDocker className="text-blue-500" size={20}/> Docker</div>
-                          <div className="flex items-center gap-2 text-white"><SiLinux className="text-gray-300" size={20}/> Linux</div>
+                      <FadeInSection>
+                        <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
+                          <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white">DevOps & Cloud</h4>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2 text-white"><SiAmazon className="text-yellow-400" size={20}/> AWS</div>
+                            <div className="flex items-center gap-2 text-white"><SiDocker className="text-blue-500" size={20}/> Docker</div>
+                            <div className="flex items-center gap-2 text-white"><SiLinux className="text-gray-300" size={20}/> Linux</div>
+                          </div>
                         </div>
-                      </div>
+                      </FadeInSection>
                       {/* Databases & Tools */}
-                      <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
-                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Databases & Tools</h4>
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center gap-2 text-white"><SiMongodb className="text-green-500" size={20}/> MongoDB</div>
-                          <div className="flex items-center gap-2 text-white"><SiPostgresql className="text-blue-400" size={20}/> PostgreSQL</div>
-                          <div className="flex items-center gap-2 text-white"><SiGit className="text-orange-600" size={20}/> Git</div>
+                      <FadeInSection>
+                        <div className="bg-white/10 dark:bg-gray-800/80 rounded-xl p-6 flex flex-col gap-4 shadow-md">
+                          <h4 className="font-semibold text-lg mb-2 flex items-center gap-2 text-white"> Databases & Tools</h4>
+                          <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2 text-white"><SiMongodb className="text-green-500" size={20}/> MongoDB</div>
+                            <div className="flex items-center gap-2 text-white"><SiPostgresql className="text-blue-400" size={20}/> PostgreSQL</div>
+                            <div className="flex items-center gap-2 text-white"><SiGit className="text-orange-600" size={20}/> Git</div>
+                          </div>
                         </div>
-                      </div>
+                      </FadeInSection>
                     </div>
                   </div>
             </div>
@@ -583,8 +610,10 @@ const App = () => {
         </div>
           </GlassCard>
       </section>
+      </FadeInSection>
 
-        <section id="experience" className="py-10">
+      <FadeInSection id="experience">
+        <section className="py-10">
           <GlassCard>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-10">
@@ -592,51 +621,59 @@ const App = () => {
               </div>
               <div className="space-y-8">
                 {/* Ab Ovo */}
-                <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
-                  <img src="/abovo-logo.png" alt="Ab Ovo Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
-                  <div>
-                    <h3 className="text-lg md:text-xl font-bold text-white">Machine Learning Intern – Ab Ovo</h3>
-                    <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 05/2025 – Present</p>
-                    <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
-                      <li>Building PIKE-RAG system to transform complex railway legal media into actionable B2B insights</li>
-                      <li>Engineering data ingestion pipelines, including document chunking, semantic embedding, and vector DB integration</li>
-                      <li>Optimizing LLM outputs via prompt engineering to ensure contextually accurate business analysis from legal sources</li>
-                    </ul>
+                <FadeInSection>
+                  <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
+                    <img src="/abovo-logo.png" alt="Ab Ovo Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-white">Machine Learning Intern – Ab Ovo</h3>
+                      <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 05/2025 – Present</p>
+                      <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
+                        <li>Building PIKE-RAG system to transform complex railway legal media into actionable B2B insights</li>
+                        <li>Engineering data ingestion pipelines, including document chunking, semantic embedding, and vector DB integration</li>
+                        <li>Optimizing LLM outputs via prompt engineering to ensure contextually accurate business analysis from legal sources</li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                </FadeInSection>
 
                 {/* Khalifa University */}
-                <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
-                  <img src="/ku-logo.png" alt="Khalifa University Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
-                  <div>
-                    <h3 className="text-lg md:text-xl font-bold text-white">Cybersecurity Undergraduate Research Fellow – Khalifa University</h3>
-                    <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 10/2024 – Present</p>
-                    <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
-                      <li>Co-authoring journal paper titled "Real-Time Intrusion Detection at the Edge Leveraging Hybrid Transformers," planned for publication by beginning of June 2025</li>
-                      <li>Conducted experimentation on binary & multi-class classification of Transformers on NIDS datasets, improving on accuracy and time by 31% with data ingestion strategies & hyperparameter tuning</li>
-                    </ul>
+                <FadeInSection>
+                  <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
+                    <img src="/ku-logo.png" alt="Khalifa University Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-white">Cybersecurity Undergraduate Research Fellow – Khalifa University</h3>
+                      <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 10/2024 – Present</p>
+                      <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
+                        <li>Co-authoring journal paper titled "Real-Time Intrusion Detection at the Edge Leveraging Hybrid Transformers," planned for publication by beginning of June 2025</li>
+                        <li>Conducted experimentation on binary & multi-class classification of Transformers on NIDS datasets, improving on accuracy and time by 31% with data ingestion strategies & hyperparameter tuning</li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                </FadeInSection>
 
                 {/* Siemens */}
-                <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
-                  <img src="/siemens-logo.png" alt="Siemens Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
-                  <div>
-                    <h3 className="text-lg md:text-xl font-bold text-white">Software Engineering Intern – Siemens Industrial LLC</h3>
-                    <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 06/2024 – 08/2024</p>
-                    <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
-                      <li>Developed a KPI automation tool using Python, minimizing overall data processing time by 80%</li>
-                      <li>Participated in cybersecurity upgrade project and used MS Power BI & MS Project to support execution & monitoring phases</li>
-                      <li>Completed extensive training on Siemens EA portfolio and project management, practical experience at Power Academy</li>
-                    </ul>
+                <FadeInSection>
+                  <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
+                    <img src="/siemens-logo.png" alt="Siemens Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-white">Software Engineering Intern – Siemens Industrial LLC</h3>
+                      <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 06/2024 – 08/2024</p>
+                      <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
+                        <li>Developed a KPI automation tool using Python, minimizing overall data processing time by 80%</li>
+                        <li>Participated in cybersecurity upgrade project and used MS Power BI & MS Project to support execution & monitoring phases</li>
+                        <li>Completed extensive training on Siemens EA portfolio and project management, practical experience at Power Academy</li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                </FadeInSection>
               </div>
             </div>
           </GlassCard>
       </section>
+      </FadeInSection>
 
-        <section id="projects" className="py-10">
+      <FadeInSection id="projects">
+        <section className="py-10">
           <GlassCard>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-10">
@@ -646,157 +683,169 @@ const App = () => {
             </p>
           </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <a href="https://www.youtube.com/watch?v=3I6_HGFMFMQ&feature=youtu.be" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
-                  <div className="aspect-video bg-gradient-to-br from-green-200 to-green-400 flex items-center justify-center">
-                    <span className="text-5xl text-green-400">
-                      <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col relative">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-green-600 transition-colors text-gray-200">GreenCart</h3>
-                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-semibold">Flutter / Python</span>
+                <FadeInSection>
+                  <a href="https://www.youtube.com/watch?v=3I6_HGFMFMQ&feature=youtu.be" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
+                    <div className="aspect-video bg-gradient-to-br from-green-200 to-green-400 flex items-center justify-center">
+                      <span className="text-5xl text-green-400">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      </span>
                     </div>
-                    <div className="mt-2">
-                      <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
+                    <div className="p-6 flex-1 flex flex-col relative">
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="text-xl font-bold group-hover:text-green-600 transition-colors text-gray-200">GreenCart</h3>
+                        <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-semibold">Flutter / Python</span>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
+                          <ExternalLink size={14} />
+                          View Project
+                        </span>
+                      </div>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Built GreenCart to promote sustainable shopping, securing 9,000 AED prize against 20 teams.</p>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Utilized Flutter for front-end, Python & Flask for back-end and integrated Google's Gemini & various APIs using JS.</p>
+                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">Enabled real-time product analysis and sustainability insights, aligning with 5 SDGs and the UAE's Green Agenda.</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flutter</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Gemini</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">REST API</span>
+                      </div>
+                    </div>
+                  </a>
+                </FadeInSection>
+                <FadeInSection>
+                  <a href="https://socia-ae.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
+                    <div className="aspect-video bg-gradient-to-br from-blue-200 to-blue-400 flex items-center justify-center">
+                      <span className="text-5xl text-blue-400">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        </span>
+                    </div>
+                    <div className="p-6 flex-1 flex flex-col relative">
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors text-gray-200">Socia</h3>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-semibold">React Native / Python</span>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
                         <ExternalLink size={14} />
                         View Project
+                        </span>
+                      </div>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Implemented a cross-platform mobile app using React Native and Flask-Python backend integrated with Azure AI.</p>
+                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">Designed 4 realistic practice environments, improving user engagement and public speaking proficiency by 70%.</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Expo</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React Native</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Azure</span>
+                      </div>
+                    </div>
+                  </a>
+                </FadeInSection>
+                <FadeInSection>
+                  <a href="https://www.canva.com/design/DAGgCawTGH8/reEiSTx2A2L76Y9IYZbNmA/view?utm_content=DAGgCawTGH8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h17cd0e311c" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <div className="aspect-video bg-gradient-to-br from-purple-200 to-purple-400 flex items-center justify-center">
+                      <span className="text-5xl text-purple-400">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                       </span>
                     </div>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Built GreenCart to promote sustainable shopping, securing 9,000 AED prize against 20 teams.</p>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Utilized Flutter for front-end, Python & Flask for back-end and integrated Google's Gemini & various APIs using JS.</p>
-                    <p className="text-gray-700 mb-4 text-sm leading-relaxed">Enabled real-time product analysis and sustainability insights, aligning with 5 SDGs and the UAE's Green Agenda.</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flutter</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Gemini</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">REST API</span>
+                    <div className="p-6 flex-1 flex flex-col relative">
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="text-xl font-bold group-hover:text-purple-600 transition-colors text-gray-200">F.A.L.C.O.N. Flood Monitoring System</h3>
+                        <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full font-semibold">Python / CNN</span>
                     </div>
+                      <div className="mt-2">
+                        <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
+                          <ExternalLink size={14} />
+                          View Project
+                        </span>
                   </div>
-                </a>
-                <a href="https://socia-ae.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
-                  <div className="aspect-video bg-gradient-to-br from-blue-200 to-blue-400 flex items-center justify-center">
-                    <span className="text-5xl text-blue-400">
-                      <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                      </span>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col relative">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors text-gray-200">Socia</h3>
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-semibold">React Native / Python</span>
-                    </div>
-                    <div className="mt-2">
-                      <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
-                      <ExternalLink size={14} />
-                      View Project
-                      </span>
-                    </div>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Implemented a cross-platform mobile app using React Native and Flask-Python backend integrated with Azure AI.</p>
-                    <p className="text-gray-700 mb-4 text-sm leading-relaxed">Designed 4 realistic practice environments, improving user engagement and public speaking proficiency by 70%.</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Expo</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React Native</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Azure</span>
-                    </div>
-                  </div>
-                </a>
-                <a href="https://www.canva.com/design/DAGgCawTGH8/reEiSTx2A2L76Y9IYZbNmA/view?utm_content=DAGgCawTGH8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h17cd0e311c" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <div className="aspect-video bg-gradient-to-br from-purple-200 to-purple-400 flex items-center justify-center">
-                    <span className="text-5xl text-purple-400">
-                      <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col relative">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-purple-600 transition-colors text-gray-200">F.A.L.C.O.N. Flood Monitoring System</h3>
-                      <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full font-semibold">Python / CNN</span>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Deployed a YOLOv9 model for real-time flood segmentation on satellite imagery using DEMs for flood volume.</p>
+                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">Developed a cloud pipeline for scalable flood detection and visualization, supporting urban disaster planning in the UAE.</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">CNN</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Torch</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">OpenAI</span>
                 </div>
-                    <div className="mt-2">
-                      <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
-                        <ExternalLink size={14} />
-                        View Project
-                      </span>
               </div>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Deployed a YOLOv9 model for real-time flood segmentation on satellite imagery using DEMs for flood volume.</p>
-                    <p className="text-gray-700 mb-4 text-sm leading-relaxed">Developed a cloud pipeline for scalable flood detection and visualization, supporting urban disaster planning in the UAE.</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">CNN</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Torch</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">OpenAI</span>
-          </div>
-        </div>
                 </a>
-                <a href="https://auro-uaehackathon.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <div className="aspect-video bg-gradient-to-br from-yellow-200 to-yellow-400 flex items-center justify-center">
-                    <span className="text-5xl text-yellow-400">
-                      <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col relative">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-yellow-600 transition-colors text-gray-200">Auro</h3>
-                      <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-semibold">React Native / Python</span>
-                    </div>
-                    <div className="mt-2">
-                      <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
-                      <ExternalLink size={14} />
-                      View Project
+                </FadeInSection>
+                <FadeInSection>
+                  <a href="https://auro-uaehackathon.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <div className="aspect-video bg-gradient-to-br from-yellow-200 to-yellow-400 flex items-center justify-center">
+                      <span className="text-5xl text-yellow-400">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                       </span>
                     </div>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Implemented React Native frontend with Flask-Python/Azure AI backend for cross-platform Autism caregiver app.</p>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Built TensorFlow emotion-recognition pipeline integrated via Azure Cognitive Service.</p>
-                    <p className="text-gray-700 mb-4 text-sm leading-relaxed">Developed Node.js WebSocket speech-to-text microservice delivering rapid feedback.</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Expo</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">TensorFlow</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React Native</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Azure ML</span>
-                    </div>
-                  </div>
-                </a>
-                <a href="https://uavms.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <div className="aspect-video bg-gradient-to-br from-cyan-200 to-cyan-400 flex items-center justify-center">
-                    <span className="text-5xl text-cyan-400">
-                      <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col relative">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-cyan-600 transition-colors text-gray-200">UAVMS: UTM Drone Identification & Disambiguation</h3>
-                      <span className="px-2 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full font-semibold">Python / YOLOv8</span>
-                    </div>
-                    <div className="mt-2">
-                      <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
+                    <div className="p-6 flex-1 flex flex-col relative">
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="text-xl font-bold group-hover:text-yellow-600 transition-colors text-gray-200">Auro</h3>
+                        <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-semibold">React Native / Python</span>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
                         <ExternalLink size={14} />
                         View Project
+                        </span>
+                      </div>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Implemented React Native frontend with Flask-Python/Azure AI backend for cross-platform Autism caregiver app.</p>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Built TensorFlow emotion-recognition pipeline integrated via Azure Cognitive Service.</p>
+                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">Developed Node.js WebSocket speech-to-text microservice delivering rapid feedback.</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Expo</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">TensorFlow</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">React Native</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flask</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Azure ML</span>
+                      </div>
+                    </div>
+                  </a>
+                </FadeInSection>
+                <FadeInSection>
+                  <a href="https://uavms.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <div className="aspect-video bg-gradient-to-br from-cyan-200 to-cyan-400 flex items-center justify-center">
+                      <span className="text-5xl text-cyan-400">
+                        <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                       </span>
                     </div>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Developed UAVMS to verify indoor drone identities by fusing AI visual detection (YOLOv8, 90.5% mAP) with our Indoor Positioning System data (±8cm accuracy).</p>
-                    <p className="text-gray-700 mb-2 text-sm leading-relaxed">Engineered VIDTrack (Python) for real-time comparison of observed visual coordinates against reported positions.</p>
-                    <p className="text-gray-700 mb-4 text-sm leading-relaxed">Created a comprehensive solution with a custom 50k+ image dataset and a GUI for robust indoor UTM monitoring.</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">YOLOv8</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">OpenCV</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">ZED SDK</span>
-                      <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">PX4</span>
+                    <div className="p-6 flex-1 flex flex-col relative">
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="text-xl font-bold group-hover:text-cyan-600 transition-colors text-gray-200">UAVMS: UTM Drone Identification & Disambiguation</h3>
+                        <span className="px-2 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full font-semibold">Python / YOLOv8</span>
+                      </div>
+                      <div className="mt-2">
+                        <span className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium">
+                          <ExternalLink size={14} />
+                          View Project
+                        </span>
+                      </div>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Developed UAVMS to verify indoor drone identities by fusing AI visual detection (YOLOv8, 90.5% mAP) with our Indoor Positioning System data (±8cm accuracy).</p>
+                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Engineered VIDTrack (Python) for real-time comparison of observed visual coordinates against reported positions.</p>
+                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">Created a comprehensive solution with a custom 50k+ image dataset and a GUI for robust indoor UTM monitoring.</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">YOLOv8</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">OpenCV</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">ZED SDK</span>
+                        <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">PX4</span>
+                    </div>
                   </div>
-                </div>
                 </a>
+              </FadeInSection>
               </div>
           </div>
           </GlassCard>
       </section>
+      </FadeInSection>
 
-        <section id="competitions" className="py-10">
+      <FadeInSection id="competitions">
+        <section className="py-10">
           <GlassCard>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-10">
@@ -926,55 +975,59 @@ const App = () => {
               };
 
               return (
-                <div key={index} className={`group block rounded-xl p-6 flex items-start space-x-6 ${styles.container} transition-all duration-300 ease-in-out`}>
-                  <div className="hidden md:flex flex-col flex-shrink-0 w-32 h-32 rounded-lg items-center justify-center gap-2">
-                    {competition.image && (
-                      <img
-                        src={competition.image}
-                        alt={`${competition.title} award`}
-                        className="rounded-md object-cover max-h-16 w-auto mb-1 border border-gray-300 competition-award-img cursor-zoom-in"
-                        style={{background:'#fff'}}
-                        onClick={e => {
-                          e.stopPropagation();
-                          setExpandedCompetitionImage(competition.image);
-                        }}
-                      />
-                    )}
-                    <div className={`w-10 h-10 rounded-lg p-1 flex-shrink-0 flex items-center justify-center shadow-sm`} style={{ backgroundColor: 'white' }}>
-                      <img src={competition.logo} alt={`${competition.title} logo`} className="max-w-full max-h-full object-contain" />
-                    </div>
-                  </div>
-                  <a
-                    href={competition.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 cursor-pointer"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <div className="flex justify-between items-start">
-                      <div className="flex items-center space-x-4">
-                        <div>
-                          <h3 className="text-gray-300 font-semibold">{competition.title}</h3>
-                          <p className={`text-lg font-bold ${styles.positionColor}`}>{competition.position}</p>
-                        </div>
+                <FadeInSection key={index}>
+                  <div className={`group block rounded-xl p-6 flex items-start space-x-6 ${styles.container} transition-all duration-300 ease-in-out`}>
+                    <div className="hidden md:flex flex-col flex-shrink-0 w-32 h-32 rounded-lg items-center justify-center gap-2">
+                      {competition.image && (
+                        <img
+                          src={competition.image}
+                          alt={`${competition.title} award`}
+                          className="rounded-md object-cover max-h-16 w-auto mb-1 border border-gray-300 competition-award-img cursor-zoom-in"
+                          style={{background:'#fff'}}
+                          onClick={e => {
+                            e.stopPropagation();
+                            setExpandedCompetitionImage(competition.image);
+                          }}
+                        />
+                      )}
+                      <div className={`w-10 h-10 rounded-lg p-1 flex-shrink-0 flex items-center justify-center shadow-sm`} style={{ backgroundColor: 'white' }}>
+                        <img src={competition.logo} alt={`${competition.title} logo`} className="max-w-full max-h-full object-contain" />
                       </div>
-                      <span className="text-gray-400 text-sm font-semibold">{competition.date}</span>
                     </div>
-                    <p className="text-gray-300 mt-2 mb-4">{competition.description}</p>
-                    <div className="flex gap-2">
-                      <span className="award-tag">{competition.achievement}</span>
-                      <span className="award-tag award-participants">{competition.participants}</span>
-                    </div>
-                  </a>
-                </div>
+                    <a
+                      href={competition.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 cursor-pointer"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex items-center space-x-4">
+                          <div>
+                            <h3 className="text-gray-300 font-semibold">{competition.title}</h3>
+                            <p className={`text-lg font-bold ${styles.positionColor}`}>{competition.position}</p>
+                          </div>
+                        </div>
+                        <span className="text-gray-400 text-sm font-semibold">{competition.date}</span>
+                      </div>
+                      <p className="text-gray-300 mt-2 mb-4">{competition.description}</p>
+                      <div className="flex gap-2">
+                        <span className="award-tag">{competition.achievement}</span>
+                        <span className="award-tag award-participants">{competition.participants}</span>
+                      </div>
+                    </a>
+                  </div>
+                </FadeInSection>
               );
             })}
           </div>
         </div>
           </GlassCard>
       </section>
+      </FadeInSection>
 
-        <section id="creative" className="py-10">
+      <FadeInSection id="creative">
+        <section className="py-10">
           <GlassCard>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center min-h-[300px] py-16">
@@ -1015,8 +1068,10 @@ const App = () => {
         </div>
           </GlassCard>
       </section>
+      </FadeInSection>
 
-        <section id="contact" className="py-20">
+      <FadeInSection id="contact">
+        <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Get In Touch</h2>
@@ -1069,8 +1124,9 @@ const App = () => {
           </div>
         </div>
       </section>
+      </FadeInSection>
 
-        <footer className="py-8 border-t border-gray-700">
+        <footer className="py-8 border-t border-gray-700 cool-footer-glass">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
