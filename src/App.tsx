@@ -4,6 +4,7 @@ import { SiTensorflow, SiPytorch, SiHuggingface, SiScikitlearn, SiOpenai, SiPyth
 import { FaJava } from 'react-icons/fa';
 import MorphingBackground from './MorphingBackground';
 import GlassCard from './GlassCard';
+import { Analytics } from '@vercel/analytics/react';
 
 const SnakeGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -410,7 +411,9 @@ const App = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 md:mb-10">
             <button
-              onClick={() => scrollToSection('projects')}
+              onClick={(e) => {
+                scrollToSection('projects');
+              }}
                 className="animated-gradient-btn rounded-lg px-6 py-3 text-base font-semibold whitespace-nowrap flex items-center justify-center gap-2"
                 style={{ minWidth: '12rem' }}
             >
@@ -643,7 +646,7 @@ const App = () => {
             </p>
           </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <a href="https://www.youtube.com/watch?v=3I6_HGFMFMQ&feature=youtu.be" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <a href="https://www.youtube.com/watch?v=3I6_HGFMFMQ&feature=youtu.be" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
                   <div className="aspect-video bg-gradient-to-br from-green-200 to-green-400 flex items-center justify-center">
                     <span className="text-5xl text-green-400">
                       <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -672,7 +675,7 @@ const App = () => {
                     </div>
                   </div>
                 </a>
-                <a href="https://socia-ae.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <a href="https://socia-ae.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
                   <div className="aspect-video bg-gradient-to-br from-blue-200 to-blue-400 flex items-center justify-center">
                     <span className="text-5xl text-blue-400">
                       <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -1110,6 +1113,7 @@ const App = () => {
           </div>
         </div>
       )}
+      <Analytics />
     </MorphingBackground>
   );
 };
