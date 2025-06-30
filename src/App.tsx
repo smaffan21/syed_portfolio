@@ -998,9 +998,24 @@ const App = () => {
                       href={competition.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 cursor-pointer"
+                      className="flex-1 cursor-pointer relative group"
                       style={{ textDecoration: 'none' }}
                     >
+                      <span
+                        className="external-link-icon absolute"
+                        style={{
+                          bottom: 8,
+                          right: 0,
+                          zIndex: 10,
+                          opacity: 1,
+                          background: 'rgba(30,41,59,0.7)',
+                          borderRadius: '50%',
+                          padding: '2px',
+                          boxShadow: '0 1px 4px rgba(0,0,0,0.12)'
+                        }}
+                      >
+                        <ExternalLink size={18} className="text-gray-400 group-hover:text-blue-500 transition-colors duration-200" />
+                      </span>
                       <div className="flex justify-between items-start">
                         <div className="flex items-center space-x-4">
                           <div>

@@ -14,15 +14,19 @@
   margin-right: auto;
   z-index: 1;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: visible;
   @media (max-width: 900px) {
     padding: 1.5rem;
-    max-width: 98vw;
-    width: 98vw;
+    max-width: 99vw;
+    width: 99vw;
   }
   @media (max-width: 600px) {
-    padding: 1rem;
+    padding: 1.2rem;
     border-radius: 0.75rem;
+    max-width: 94vw;
+    width: 94vw;
+    margin-left: 3vw;
+    margin-right: 3vw;
   }
   &:hover {
     border-color: rgba(120, 180, 255, 0.38);
