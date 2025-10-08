@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Github, Linkedin, Mail, Download, ExternalLink, Award, Code, Briefcase, User, Home, Phone, MapPin, Calendar, ChevronDown, Brain, Database, Server, Cloud, Terminal, BookOpen, FlaskConical, GitBranch, Globe, BarChart2, Cpu, CheckCircle } from 'lucide-react';
-import { SiTensorflow, SiPytorch, SiHuggingface, SiScikitlearn, SiOpenai, SiPython, SiCplusplus, SiJavascript, SiTypescript, SiC, SiNumpy, SiPandas, SiJupyter, SiReact, SiNodedotjs, SiHtml5, SiCss3, SiDocker, SiAmazon, SiKubernetes, SiLinux, SiMongodb, SiPostgresql, SiGit, SiWhatsapp } from 'react-icons/si';
+import { Menu, X, Github, Linkedin, Mail, ExternalLink, Award, Code, Briefcase, User, Home, MapPin, Calendar, ChevronDown } from 'lucide-react';
+import { SiTensorflow, SiPytorch, SiHuggingface, SiScikitlearn, SiOpenai, SiPython, SiCplusplus, SiJavascript, SiTypescript, SiC, SiNumpy, SiPandas, SiJupyter, SiReact, SiNodedotjs, SiHtml5, SiCss3, SiDocker, SiAmazon, SiLinux, SiMongodb, SiPostgresql, SiGit, SiWhatsapp } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 import MorphingBackground from './MorphingBackground';
 import GlassCard from './GlassCard';
@@ -52,7 +52,7 @@ const SnakeGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [dir, onClose]);
+  }, [dir, onClose, running]);
 
   // Game loop
   useEffect(() => {
@@ -61,7 +61,7 @@ const SnakeGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       setDir(nextDir);
       setSnake(prev => {
         // Wrap around logic
-        let newHead = {
+        const newHead = {
           x: (prev[0].x + nextDir.x + gridSize) % gridSize,
           y: (prev[0].y + nextDir.y + gridSize) % gridSize
         };
@@ -70,7 +70,7 @@ const SnakeGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           setRunning(false);
           return prev;
         }
-        let newSnake = [newHead, ...prev];
+        const newSnake = [newHead, ...prev];
         if (newHead.x === food.x && newHead.y === food.y) {
           setScore(s => s + 1);
           // Place new food
@@ -181,15 +181,13 @@ const SnakeGame: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [openGallery, setOpenGallery] = useState<null | 'photography' | 'videography' | 'design'>(null);
   const [showSnake, setShowSnake] = useState(false);
   const [showMeTooltip, setShowMeTooltip] = useState(false);
   const [meTooltipPos, setMeTooltipPos] = useState({ x: 0, y: 0 });
   const tooltipRAF = useRef<number | null>(null);
   const [headerHover, setHeaderHover] = useState(false);
   const [headerFill, setHeaderFill] = useState(0); // 0 to 1
-  const headerTimer = useRef<any>(null);
-  const headerFillRAF = useRef<any>(null);
+  const headerFillRAF = useRef<number | null>(null);
   const [expandedCompetitionImage, setExpandedCompetitionImage] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -424,7 +422,7 @@ const App = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 md:mb-10">
             <button
-              onClick={(e) => {
+              onClick={() => {
                 scrollToSection('projects');
               }}
                 className="animated-gradient-btn rounded-lg px-6 py-3 text-base font-semibold whitespace-nowrap flex items-center justify-center gap-2"
@@ -620,6 +618,22 @@ const App = () => {
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-100">Work Experience</h2>
               </div>
               <div className="space-y-8">
+                {/* KUEC */}
+                <FadeInSection>
+                  <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
+                    <img src="/kuec-logo.png" alt="KUEC Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold text-white">AI & DevOps Full-Stack Engineer – Khalifa University Enterprise Company</h3>
+                      <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 07/2023 – Present</p>
+                      <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
+                        <li>Leading development for UVenture, an AI platform for KUEC research–industry–investor personas connection</li>
+                        <li>Implementing secure AI powered advisory and matchmaking features with fine-tuned Llama models</li>
+                        <li>Shipping through Azure Static Web Apps + SQL Server + S3 Storage with CI/CD, RBAC, and full-stack observability</li>
+                      </ul>
+                    </div>
+                  </div>
+                </FadeInSection>
+
                 {/* Ab Ovo */}
                 <FadeInSection>
                   <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
@@ -684,7 +698,7 @@ const App = () => {
           </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <FadeInSection>
-                  <a href="https://www.youtube.com/watch?v=3I6_HGFMFMQ&feature=youtu.be" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
+                  <a href="https://www.youtube.com/watch?v=3I6_HGFMFMQ&feature=youtu.be" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={() => {}}>
                     <div className="aspect-video bg-gradient-to-br from-green-200 to-green-400 flex items-center justify-center">
                       <span className="text-5xl text-green-400">
                         <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -715,7 +729,7 @@ const App = () => {
                   </a>
                 </FadeInSection>
                 <FadeInSection>
-                  <a href="https://socia-ae.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={(e) => {}}>
+                  <a href="https://socia-ae.vercel.app/" target="_blank" rel="noopener noreferrer" className="group bg-gray-900/60 rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 overflow-hidden flex flex-col cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={() => {}}>
                     <div className="aspect-video bg-gradient-to-br from-blue-200 to-blue-400 flex items-center justify-center">
                       <span className="text-5xl text-blue-400">
                         <svg width="64" height="64" fill="none" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M7 17l5-5 5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -941,7 +955,7 @@ const App = () => {
                 url: 'https://www.youtube.com/watch?v=U3Dp8hJp2_Y'
               },
             ].map((competition, index) => {
-              const competitionStyles: { [key: string]: any } = {
+              const competitionStyles: { [key: string]: { container: string; iconBg: string; iconColor: string; positionColor: string } } = {
                 gold: {
                   container: 'award-container-gold',
                   iconBg: 'bg-yellow-500/20',

@@ -17,11 +17,14 @@ const FadeInSection: React.FC<FadeInSectionProps> = ({ children, className = '',
       },
       { threshold: 0.15 }
     );
-    if (domRef.current) {
-      observer.observe(domRef.current);
+    const currentElement = domRef.current;
+    if (currentElement) {
+      observer.observe(currentElement);
     }
     return () => {
-      if (domRef.current) observer.unobserve(domRef.current);
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
     };
   }, []);
 
