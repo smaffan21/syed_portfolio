@@ -204,7 +204,7 @@ const App = () => {
       setScrollProgress(progress);
 
       // Update active section
-      const sections = ['home', 'about', 'experience', 'projects', 'competitions', 'creative', 'contact'];
+      const sections = ['home', 'about', 'experience', 'projects', 'competitions', 'contact'];
       const scrollPosition = window.scrollY + 100;
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -237,7 +237,6 @@ const App = () => {
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'projects', label: 'Projects', icon: Code },
     { id: 'competitions', label: 'Competitions', icon: Award },
-    { id: 'creative', label: 'Creative', icon: Briefcase },
     { id: 'contact', label: 'Contact', icon: Mail }
   ];
 
@@ -329,7 +328,7 @@ const App = () => {
 
             <div className="flex items-center gap-4">
                 {/* <a
-                  href="/Syed M. Affan - BSc. Computer Engineering - Resume.pdf"
+                  href="/Syed M. Affan - BSc. Fullstack AI Engineer & NLP Enthusiasting - Resume.pdf"
                   download
                   className="animated-gradient-btn inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md"
                 >
@@ -356,7 +355,6 @@ const App = () => {
                 { id: 'about', label: 'About', icon: User },
                 { id: 'projects', label: 'Projects', icon: Code },
                 { id: 'competitions', label: 'Competitions', icon: Award },
-                { id: 'creative', label: 'Creative', icon: Briefcase },
                 { id: 'contact', label: 'Contact', icon: Mail }
               ].map(({ id, label, icon: Icon }) => (
                 <button
@@ -388,7 +386,7 @@ const App = () => {
                 onMouseMove={handleTooltipMove}
               >
                 <img
-                  src="/profilepic.jpg"
+                  src="/profilepic.png"
                   alt="Syed M. Affan Graduation"
                   className="w-40 h-40 md:w-80 md:h-80 rounded-full object-cover shadow-xl border-2 border-white"
                   style={{ pointerEvents: 'none' }}
@@ -413,7 +411,7 @@ const App = () => {
                 Syed Affan
               </h1>
               <p className="text-lg md:text-3xl text-gray-200 mb-2">  
-                Computer Engineer
+                Fullstack AI Engineer & NLP Enthusiast
               </p>
               <p className="text-sm md:text-xl text-gray-300 max-w-2xl mx-auto mb-4 md:mb-2">
                 Passionate about AI/ML, software development, and creating innovative solutions that make a difference
@@ -425,16 +423,16 @@ const App = () => {
               onClick={() => {
                 scrollToSection('projects');
               }}
-                className="animated-gradient-btn rounded-lg px-6 py-3 text-base font-semibold whitespace-nowrap flex items-center justify-center gap-2"
+                className="animated-gradient-btn rounded-lg px-6 py-3 text-base font-semibold whitespace-nowrap flex items-center justify-center gap-2 hover:scale-105 hover:shadow-xl transition-all duration-300"
                 style={{ minWidth: '12rem' }}
             >
               <Code size={20} />
               View My Work
             </button>
             {/* <a
-              href="/Syed M. Affan - BSc. Computer Engineering - Resume.pdf"
+              href="/Syed M. Affan - BSc. Fullstack AI Engineer & NLP Enthusiasting - Resume.pdf"
               download
-                className="animated-gradient-btn rounded-lg px-6 py-3 text-base font-semibold whitespace-nowrap flex items-center justify-center gap-2"
+                className="animated-gradient-btn rounded-lg px-6 py-3 text-base font-semibold whitespace-nowrap flex items-center justify-center gap-2 hover:scale-105 hover:shadow-xl transition-all duration-300"
                 style={{ minWidth: '12rem' }}
             >
               <Download size={20} />
@@ -469,7 +467,7 @@ const App = () => {
               href="https://socia.ae"
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-glow-socia p-3 md:p-5 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="icon-glow-socia p-3 md:p-5 rounded-full bg-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
             >
               <img src="/socia-logo.png" alt="Socia" className="h-6 w-6 md:h-10 md:w-10 object-contain" />
             </a>
@@ -500,7 +498,7 @@ const App = () => {
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-900 dark:text-gray-100">About Me</h2>
                 <p className="text-base md:text-lg font-medium text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-              A dedicated Computer Engineering student with a passion for artificial intelligence, 
+              A dedicated Fullstack AI Engineer & NLP Enthusiasting student with a passion for artificial intelligence, 
               machine learning, and innovative software solutions.
             </p>
           </div>
@@ -508,7 +506,7 @@ const App = () => {
             <div className="w-full">
                   <h3 className="text-2xl font-bold mb-4  text-gray-100">Background</h3>
                   <p className="text-gray-200 mb-4 bg-gray-900/60 rounded-lg px-4 py-2">
-                Currently pursuing a Bachelor's degree in Computer Engineering, I'm deeply passionate about 
+                Currently pursuing a Bachelor's degree in Fullstack AI Engineer & NLP Enthusiasting, I'm deeply passionate about 
                 the intersection of technology and innovation. My academic journey has equipped me with 
                 strong foundations in software development, AI/ML, and system design.
               </p>
@@ -528,7 +526,7 @@ const App = () => {
                       <img src="/ku-logo.png" alt="Khalifa University Logo" className="h-8 w-8 mr-2" />
                       <div>
                         <div className="font-bold text-lg text-white inline-block align-middle">Khalifa University</div>
-                        <div className="text-gray-300 font-medium">BSc. Computer Engineering</div>
+                        <div className="text-gray-300 font-medium">BSc. Fullstack AI Engineer & NLP Enthusiasting</div>
                         <div className="text-gray-400 text-sm">2021 – 2025 &bull; Abu Dhabi, UAE</div>
             </div>
                     </div>
@@ -1067,50 +1065,6 @@ const App = () => {
                 </FadeInSection>
               );
             })}
-          </div>
-        </div>
-          </GlassCard>
-      </section>
-      </FadeInSection>
-
-      <FadeInSection id="creative">
-        <section className="py-10">
-          <GlassCard>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-center min-h-[300px] py-16">
-            <div className="relative mb-8 flex flex-col items-center">
-              {/* Wooden barrier / red tape effect */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
-                <div style={{
-                  width: '220px',
-                  height: '32px',
-                  background: 'repeating-linear-gradient(135deg, #b91c1c 0 20px, #fff 20px 40px)',
-                  borderRadius: '8px',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                  transform: 'rotate(-8deg)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '2px solid #b91c1c',
-                  fontWeight: 700,
-                  color: '#fff',
-                  fontSize: '1.1rem',
-                  letterSpacing: '0.1em',
-                  textShadow: '0 1px 4px #000',
-                  padding: '0 16px',
-                  userSelect: 'none',
-                }}>
-                  🚧 UNDER CONSTRUCTION 🚧
-                </div>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-100 relative" style={{ marginTop: '32px' }}>
-                
-              </h2>
-            </div>
-            <p className="text-lg text-gray-300 text-center max-w-xl">
-              This section is currently under construction.<br />
-              Stay tuned for a showcase of creative work soon!
-            </p>
           </div>
         </div>
           </GlassCard>

@@ -363,3 +363,24 @@ html, body {
   -webkit-backdrop-filter: blur(12px);
   border-top: 1.5px solid rgba(255,255,255,0.08);
 }
+/* Socia Icon Gradient Glow Hover */
+.icon-glow-socia:hover, .icon-glow-socia:focus {
+  background: linear-gradient(135deg, #ff591c, #fd2389, #1a79ff) !important;
+  box-shadow: 0 0 20px 6px rgba(255, 107, 53, 0.4), 0 0 40px 12px rgba(123, 104, 238, 0.2) !important;
+  color: #fff !important;
+  animation: icon-socia-glow 0.8s;
+}
+.icon-glow-socia:active {
+  background: linear-gradient(135deg, #ff5011, #ed006f, #006aff) !important;
+  box-shadow: 0 0 30px 10px rgba(255, 107, 53, 0.5), 0 0 50px 15px rgba(123, 104, 238, 0.3) !important;
+  color: #fff !important;
+  animation: icon-socia-glow 0.4s;
+}
+.icon-glow-socia:hover img, .icon-glow-socia:focus img {
+  filter: invert(1) brightness(10000);
+}
+@keyframes icon-socia-glow {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(255, 107, 53, 0)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.6)); }
+  100% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(123, 104, 238, 0.6)); }
+}
