@@ -857,6 +857,18 @@ const App = () => {
           <div className="space-y-8">
             {[
               {
+                title: 'Congress of Arabic & Creative Industries',
+                position: '1st Place - University Category',
+                date: '2025',
+                description: 'Built Baian, an AI-powered app for practicing Arabic through real, dynamic conversations. Features context-aware AI dialogue, formal/informal modes, cultural nuances, and holistic live feedback on pronunciation, tone, and clarity.',
+                achievement: '1st Place',
+                participants: '40+ projects',
+                color: 'gold',
+                logo: '/ku-logo.png',
+                image: '/Pictures/baian-award.jpeg',
+                url: 'https://www.linkedin.com/posts/syed-m-affan_aepaesaenaetaepaezaepaes-abudhabi-hackathon-activity-7374321278989549568-ZsmF?utm_source=share&utm_medium=member_desktop&rcm=ACoAADpSuSYBw29oqFdKR4imQNnpzi5wOyVaiB0'
+              },
+              {
                 title: 'Zayed University Digital Transformation Hackathon',
                 position: '1st Place',
                 date: '2025',
