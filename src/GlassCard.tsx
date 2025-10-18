@@ -41,12 +41,12 @@ const GlassCard: React.FC<GlassCardProps> = ({
   // Generate a random gradient for this card instance
   const gradient = React.useMemo(() => randomGlassGradient(), []);
   // Allow dynamic background transparency
-  const dynamicStyle: React.CSSProperties = {
+  const dynamicStyle: React.CSSProperties & { '--glass-gradient': string } = {
     width,
     height,
     padding,
     ...style,
-    ['--glass-gradient' as any]: gradient,
+    '--glass-gradient': gradient,
   };
   if (backgroundAlpha !== undefined) {
     dynamicStyle.background = `rgba(255,255,255,${backgroundAlpha})`;
