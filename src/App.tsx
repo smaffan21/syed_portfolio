@@ -465,6 +465,14 @@ const App = () => {
             >
               <Github className="h-6 w-6 md:h-10 md:w-10" />
             </a>
+            <a
+              href="https://socia.ae"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-glow-socia p-3 md:p-5 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-200"
+            >
+              <img src="/socia-logo.png" alt="Socia" className="h-6 w-6 md:h-10 md:w-10 object-contain" />
+            </a>
           </div>
 
             <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4 md:bottom-2">
@@ -639,7 +647,7 @@ const App = () => {
                   <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-6 bg-gray-900/60 rounded-lg">
                     <img src="/abovo-logo.png" alt="Ab Ovo Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain mt-1"/>
                     <div>
-                      <h3 className="text-lg md:text-xl font-bold text-white">Machine Learning Intern – Ab Ovo</h3>
+                      <h3 className="text-lg md:text-xl font-bold text-white">Machine Learning Intern – Ab Ovo</h3><a href="https://github.com/smaffan21/RAG-for-QA-and-BPMN-Generation" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm font-medium mt-1"><ExternalLink size={14} />View Project</a>
                       <p className="text-sm md:text-base text-gray-400 mb-3">Abu Dhabi, UAE | 05/2025 – Present</p>
                       <ul className="list-disc pl-5 text-sm md:text-base text-gray-300 space-y-1">
                         <li>Building PIKE-RAG system to transform complex railway legal media into actionable B2B insights</li>
@@ -716,8 +724,6 @@ const App = () => {
                         </span>
                       </div>
                       <p className="text-gray-700 mb-2 text-sm leading-relaxed">Built GreenCart to promote sustainable shopping, securing 9,000 AED prize against 20 teams.</p>
-                      <p className="text-gray-700 mb-2 text-sm leading-relaxed">Utilized Flutter for front-end, Python & Flask for back-end and integrated Google's Gemini & various APIs using JS.</p>
-                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">Enabled real-time product analysis and sustainability insights, aligning with 5 SDGs and the UAE's Green Agenda.</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                         <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Flutter</span>
                         <span className="px-2 py-1 bg-gray-800 text-gray-700 text-xs rounded">Python</span>
@@ -865,7 +871,7 @@ const App = () => {
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-100">Competitions & Awards</h2>
                 <p className="text-base md:text-lg font-medium text-gray-300 max-w-3xl mx-auto">
-                  Recognitions and achievements from various competitions and hackathons
+                  My prized achievements through various hackathons and competitions
             </p>
           </div>
           <div className="space-y-8">
@@ -874,11 +880,11 @@ const App = () => {
                 title: 'Congress of Arabic & Creative Industries',
                 position: '1st Place - University Category',
                 date: '2025',
-                description: 'Built Baian, an AI-powered app for practicing Arabic through real, dynamic conversations. Features context-aware AI dialogue, formal/informal modes, cultural nuances, and holistic live feedback on pronunciation, tone, and clarity.',
+                description: 'Led Baian, an AI-powered conversational dialect-focused Arabic learning app with context-aware scenarios and real-time feedback on tone, clarity, and cultural nuances.',
                 achievement: '1st Place',
                 participants: '40+ projects',
                 color: 'gold',
-                logo: '/ku-logo.png',
+                logo: '/congress-logo.jpeg',
                 image: '/Pictures/baian-award.jpeg',
                 url: 'https://www.linkedin.com/posts/syed-m-affan_aepaesaenaetaepaezaepaes-abudhabi-hackathon-activity-7374321278989549568-ZsmF?utm_source=share&utm_medium=member_desktop&rcm=ACoAADpSuSYBw29oqFdKR4imQNnpzi5wOyVaiB0'
               },
@@ -910,7 +916,7 @@ const App = () => {
                 title: 'BCG Platinion Hackathon - Middle East',
                 position: '1st Place',
                 date: '2024',
-                description: 'Created Scrap-E, an incentivized service for e-waste collection, validation, and recycling.',
+                description: 'Built Scrap-E, turning e-waste into cash with incentivized collection and AI-based verified recycling for circular economy impact.',
                 achievement: '1st Place',
                 participants: 'Regional',
                 color: 'gold',
@@ -922,11 +928,11 @@ const App = () => {
                 title: 'Smart Mobile Application Contest',
                 position: '1st Place',
                 date: '2024',
-                description: 'Won with GreenCart, a sustainability-focused app for conscious food choices using AI analysis.',
+                description: 'Built GreenCart, a customer-centric AI-powered sustainability scanner making eco-conscious shopping rewarding with real-time product impact analysis.',
                 achievement: '1st Place',
                 participants: '13 teams',
                 color: 'gold',
-                logo: '/ku-logo.png',
+                logo: '/congress-logo.jpeg',
                 image: '/Pictures/smac-award.jpeg',
                 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7256537674499416064/'
               },
@@ -962,7 +968,7 @@ const App = () => {
                 achievement: 'Special Award',
                 participants: 'Festival',
                 color: 'purple',
-                logo: '/ku-logo.png',
+                logo: '/congress-logo.jpeg',
                 image: '/Pictures/theaterclub-award.png',
                 url: 'https://www.youtube.com/watch?v=U3Dp8hJp2_Y'
               },
