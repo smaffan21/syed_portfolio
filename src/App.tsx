@@ -6,6 +6,10 @@ type PortfolioItem = {
   description: string;
   href?: string;
   highlight?: string;
+  preview?: {
+    src: string;
+    alt: string;
+  };
 };
 
 const projects: PortfolioItem[] = [
@@ -98,6 +102,10 @@ const recognition: PortfolioItem[] = [
     highlight: '1st place',
     description: 'University category for Baian, selected from 40+ projects.',
     href: 'https://www.linkedin.com/posts/syed-m-affan_aepaesaenaetaepaezaepaes-abudhabi-hackathon-activity-7374321278989549568-ZsmF',
+    preview: {
+      src: '/Pictures/baian-award.jpeg',
+      alt: 'Baian team at the Congress of Arabic and Creative Industries',
+    },
   },
   {
     name: "NYUAD Slush'D AI Hackathon",
@@ -105,6 +113,10 @@ const recognition: PortfolioItem[] = [
     highlight: '1st place',
     description: 'Among 104 teams for Socia.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7297498834266394624/',
+    preview: {
+      src: '/Pictures/nyuad-award.jpg',
+      alt: "Socia team at the NYUAD Slush'D AI Hackathon",
+    },
   },
   {
     name: 'Zayed University Digital Transformation Hackathon',
@@ -112,6 +124,10 @@ const recognition: PortfolioItem[] = [
     highlight: '1st place',
     description: 'Among 14 teams for F.A.L.C.O.N.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7302690855050448896/',
+    preview: {
+      src: '/Pictures/zu-award.jpg',
+      alt: 'F.A.L.C.O.N. team at the Zayed University Digital Transformation Hackathon',
+    },
   },
   {
     name: 'BCG Platinion Middle East Hackathon',
@@ -119,6 +135,10 @@ const recognition: PortfolioItem[] = [
     highlight: '1st place',
     description: 'Regional award for Scrap-E, an AI-assisted e-waste recycling concept.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7271764757626408960/',
+    preview: {
+      src: '/Pictures/bcg-award.jpeg',
+      alt: 'Scrap-E team at the BCG Platinion Middle East Hackathon',
+    },
   },
   {
     name: 'Smart Mobile Application Contest',
@@ -127,6 +147,10 @@ const recognition: PortfolioItem[] = [
     description:
       'Among 13 teams for GreenCart, an AI-powered sustainability scanner for more informed shopping.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7256537674499416064/',
+    preview: {
+      src: '/Pictures/smac-award.jpeg',
+      alt: 'GreenCart team at the Smart Mobile Application Contest',
+    },
   },
   {
     name: '2nd KU Sustainability E-Gaming Competition',
@@ -141,6 +165,10 @@ const recognition: PortfolioItem[] = [
     highlight: '2nd place',
     description:
       'Prototyped a gravity-fed mail sorting system with machine learning for automated mail processing.',
+    preview: {
+      src: '/Pictures/epg-award.jpeg',
+      alt: 'Team at the Emirates Post Group Logistics Unleashed Competition',
+    },
   },
   {
     name: '1st KU Sustainability E-Gaming Competition',
@@ -198,7 +226,11 @@ function ItemList({ items }: { items: PortfolioItem[] }) {
   return (
     <ul className="item-list">
       {items.map((item) => (
-        <li className="item" key={item.name}>
+        <li
+          className="item"
+          key={item.name}
+          tabIndex={item.preview && !item.href ? 0 : undefined}
+        >
           <div className="item-heading">
             {item.href ? (
               <a href={item.href} className="item-link">
@@ -215,6 +247,16 @@ function ItemList({ items }: { items: PortfolioItem[] }) {
             ) : null}
             {item.description}
           </p>
+          {item.preview ? (
+            <img
+              className="item-preview"
+              src={item.preview.src}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : null}
         </li>
       ))}
     </ul>
@@ -343,12 +385,11 @@ function App() {
             to curate the most active builder community in the UAE.
           </p>
           <p className="intro-copy intro-copy-secondary">
-            Away from work, I host events under{' '}
-            <a className="intro-link" href="https://socia.ae/">Socia</a>, play table tennis,
-            vlog my experiences, and occasionally direct{' '}
-            <a className="short-film-link" href="https://www.youtube.com/watch?v=U3Dp8hJp2_Y">
+            Away from work, I play table tennis, vlog my experiences, and occasionally direct{' '}
+            <a className="personal-link" href="https://www.youtube.com/watch?v=U3Dp8hJp2_Y">
               short films
-            </a>.
+            </a>. I also love hackathons and now host them under{' '}
+            <a className="personal-link" href="https://socia.ae/">Socia</a>.
           </p>
         </section>
 
