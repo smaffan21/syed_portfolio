@@ -15,14 +15,14 @@ type PortfolioItem = {
 const projects: PortfolioItem[] = [
   {
     name: 'Notch',
-    year: 'Current',
+    year: 'April 2026 to current',
     description:
       'A cross-platform AI teleprompter with offline voice-following and privacy-first local processing, scaled to 1,500+ trial downloads and 100+ paying users.',
     href: 'https://socia.ae/products/notch/',
   },
   {
     name: 'Modulus',
-    year: 'Current',
+    year: '2025',
     description:
       'A five-stage agentic data-science workflow that moves from exploratory analysis to model evaluation in under a minute.',
     href: 'https://drive.google.com/file/d/1xOYEo-DMH8QdfTcvBvgSZ-B3VS2OQKn2/view?usp=sharing',
