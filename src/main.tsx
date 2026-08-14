@@ -6,6 +6,6 @@ import './index.css';
 hydrateRoot(
   document.getElementById('root')!,
   <StrictMode>
-    <App path={window.location.pathname} />
+    <App />
   </StrictMode>
 );

@@ -1,5 +1,4 @@
 import Grainient from '@/components/Grainient';
-import { caseStudies, getCaseStudy, type CaseStudy } from '@/caseStudies';
 
 type PortfolioItem = {
   name: string;
@@ -19,28 +18,28 @@ const projects: PortfolioItem[] = [
     year: 'April 2026 to present',
     description:
       'A cross-platform AI teleprompter with offline voice-following and privacy-first local processing, scaled to 1,500+ trial downloads and 100+ paying users.',
-    href: '/projects/notch/',
+    href: 'https://socia.ae/products/notch/',
   },
   {
     name: 'CDPCF',
     year: '2026',
     description:
       'A cultural data provenance and compliance framework protecting intangible heritage from unauthorized use in AI training.',
-    href: '/projects/cdpcf/',
   },
   {
     name: 'Modulus',
     year: '2025',
     description:
       'A five-stage agentic data-science workflow that moves from exploratory analysis to model evaluation in under a minute.',
-    href: '/projects/modulus/',
+    href:
+      'https://drive.google.com/file/d/1xOYEo-DMH8QdfTcvBvgSZ-B3VS2OQKn2/view?usp=sharing',
   },
   {
     name: 'UAVMS',
     year: '2025',
     description:
       'Drone identity verification combining computer vision with indoor positioning, 90.5% mAP, and a 50,000+ image dataset.',
-    href: '/projects/uavms/',
+    href: 'https://uavms.vercel.app/',
   },
   {
     name: 'F.A.L.C.O.N.',
@@ -386,89 +385,7 @@ function Background() {
   );
 }
 
-function CaseStudyPage({ study }: { study: CaseStudy }) {
-  const relatedStudies = caseStudies.filter((candidate) => candidate.slug !== study.slug);
-
-  return (
-    <>
-      <Background />
-      <div className="page-shell case-study-shell">
-        <a className="skip-link" href="#content">
-          Skip to content
-        </a>
-
-        <header className="site-header" aria-hidden="true" />
-
-        <main id="content" tabIndex={-1}>
-          <article className="case-study">
-            <a className="case-study-back" href="/">
-              ← Syed M. Affan
-            </a>
-            <p className="case-study-kicker">{study.year} · Selected work</p>
-            <h1>{study.name}</h1>
-            <p className="case-study-summary">{study.summary}</p>
-
-            <section className="case-study-section" aria-labelledby="case-overview">
-              <h2 id="case-overview">What it does</h2>
-              {study.overview.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </section>
-
-            <section className="case-study-section" aria-labelledby="case-evidence">
-              <h2 id="case-evidence">Evidence</h2>
-              <ul className="case-study-highlights">
-                {study.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
-            </section>
-
-            {study.externalHref ? (
-              <a className="case-study-cta" href={study.externalHref}>
-                {study.externalLabel} ↗
-              </a>
-            ) : null}
-
-            <nav className="related-projects" aria-label="Related projects">
-              <h2>More projects</h2>
-              <ul>
-                {relatedStudies.map((relatedStudy) => (
-                  <li key={relatedStudy.slug}>
-                    <a href={`/projects/${relatedStudy.slug}/`}>{relatedStudy.name}</a>
-                    <span>{relatedStudy.year}</span>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </article>
-        </main>
-
-        <footer className="site-footer">
-          <p>
-            Based in Abu Dhabi. Want to collaborate,{' '}
-            <a href="mailto:smaffan21@gmail.com">let’s talk</a>.
-          </p>
-          <nav className="footer-socials" aria-label="Contact and social links">
-            {socialLinks.map((link) => (
-              <a href={link.href} key={link.label} aria-label={link.label} title={link.label}>
-                <SocialIcon name={link.icon} />
-              </a>
-            ))}
-          </nav>
-        </footer>
-      </div>
-    </>
-  );
-}
-
-function App({ path = '/' }: { path?: string }) {
-  const caseStudy = getCaseStudy(path);
-
-  if (caseStudy) {
-    return <CaseStudyPage study={caseStudy} />;
-  }
-
+function App() {
   return (
     <>
       <Background />

@@ -1,11 +1,11 @@
 import { renderToString } from 'react-dom/server';
 import App from './App.tsx';
-import { caseStudyRoutes, getRouteSeo } from './caseStudies';
+import { getRouteSeo } from './caseStudies';
 
-export const routes = ['/', ...caseStudyRoutes];
+export const routes = ['/'];
 
-export function render(path: string) {
-  return renderToString(<App path={path} />);
+export function render() {
+  return renderToString(<App />);
 }
 
 export { getRouteSeo };
