@@ -1,4 +1,5 @@
 import Grainient from '@/components/Grainient';
+import { caseStudies, getCaseStudy, type CaseStudy } from '@/caseStudies';
 
 type PortfolioItem = {
   name: string;
@@ -18,21 +19,28 @@ const projects: PortfolioItem[] = [
     year: 'April 2026 to current',
     description:
       'A cross-platform AI teleprompter with offline voice-following and privacy-first local processing, scaled to 1,500+ trial downloads and 100+ paying users.',
-    href: 'https://socia.ae/products/notch/',
+    href: '/projects/notch/',
+  },
+  {
+    name: 'CDPCF',
+    year: '2026',
+    description:
+      'A cultural data provenance and compliance framework protecting intangible heritage from unauthorized use in AI training.',
+    href: '/projects/cdpcf/',
   },
   {
     name: 'Modulus',
     year: '2025',
     description:
       'A five-stage agentic data-science workflow that moves from exploratory analysis to model evaluation in under a minute.',
-    href: 'https://drive.google.com/file/d/1xOYEo-DMH8QdfTcvBvgSZ-B3VS2OQKn2/view?usp=sharing',
+    href: '/projects/modulus/',
   },
   {
     name: 'UAVMS',
     year: '2025',
     description:
       'Drone identity verification combining computer vision with indoor positioning, 90.5% mAP, and a 50,000+ image dataset.',
-    href: 'https://uavms.vercel.app/',
+    href: '/projects/uavms/',
   },
   {
     name: 'F.A.L.C.O.N.',
@@ -96,6 +104,17 @@ const education: PortfolioItem[] = [
 ];
 
 const recognition: PortfolioItem[] = [
+  {
+    name: 'UN Global SDG Public Policy Innovation Challenge',
+    year: '2026',
+    highlight: '2nd place',
+    description:
+      'Represented the UAE in China as the Middle East\u2019s only finalist, selected from 866 teams and 4,000+ applicants across 100+ countries.',
+    preview: {
+      src: '/Pictures/un-global-policy-award.jpg',
+      alt: 'CDPCF team at the UN Global SDG Public Policy Innovation Challenge in China',
+    },
+  },
   {
     name: 'Congress of Arabic & Creative Industries',
     year: '2025',
@@ -176,6 +195,10 @@ const recognition: PortfolioItem[] = [
     highlight: '3rd place',
     description:
       'Built Recycle Rush, a Unity and C# mobile game that teaches younger audiences about recycling and sustainability.',
+    preview: {
+      src: '/Pictures/ku-egaming-1-award.jpg',
+      alt: 'Recycle Rush award at the first KU Sustainability E-Gaming Competition',
+    },
   },
 ];
 
@@ -332,50 +355,134 @@ function Section({
   );
 }
 
-function App() {
+function Background() {
+  return (
+    <div className="background-layer" aria-hidden="true">
+      <Grainient
+        color1="#2c3d52"
+        color2="#313131"
+        color3="#000000"
+        timeSpeed={0}
+        colorBalance={-0.58}
+        warpStrength={1.6}
+        warpFrequency={3.8}
+        warpSpeed={2}
+        warpAmplitude={50}
+        blendAngle={-44}
+        blendSoftness={0.53}
+        rotationAmount={500}
+        noiseScale={0.8}
+        grainAmount={0.05}
+        grainScale={2}
+        grainAnimated={false}
+        contrast={1.5}
+        gamma={1}
+        saturation={1.15}
+        centerX={0}
+        centerY={0}
+        zoom={0.9}
+      />
+    </div>
+  );
+}
+
+function CaseStudyPage({ study }: { study: CaseStudy }) {
+  const relatedStudies = caseStudies.filter((candidate) => candidate.slug !== study.slug);
+
   return (
     <>
-      <div className="background-layer" aria-hidden="true">
-        <Grainient
-          color1="#2c3d52"
-          color2="#313131"
-          color3="#000000"
-          timeSpeed={0}
-          colorBalance={-0.58}
-          warpStrength={1.6}
-          warpFrequency={3.8}
-          warpSpeed={2}
-          warpAmplitude={50}
-          blendAngle={-44}
-          blendSoftness={0.53}
-          rotationAmount={500}
-          noiseScale={0.8}
-          grainAmount={0.05}
-          grainScale={2}
-          grainAnimated={false}
-          contrast={1.5}
-          gamma={1}
-          saturation={1.15}
-          centerX={0}
-          centerY={0}
-          zoom={0.9}
-        />
+      <Background />
+      <div className="page-shell case-study-shell">
+        <a className="skip-link" href="#content">
+          Skip to content
+        </a>
+
+        <header className="site-header" aria-hidden="true" />
+
+        <main id="content" tabIndex={-1}>
+          <article className="case-study">
+            <a className="case-study-back" href="/">
+              ← Syed M. Affan
+            </a>
+            <p className="case-study-kicker">{study.year} · Selected work</p>
+            <h1>{study.name}</h1>
+            <p className="case-study-summary">{study.summary}</p>
+
+            <section className="case-study-section" aria-labelledby="case-overview">
+              <h2 id="case-overview">What it does</h2>
+              {study.overview.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </section>
+
+            <section className="case-study-section" aria-labelledby="case-evidence">
+              <h2 id="case-evidence">Evidence</h2>
+              <ul className="case-study-highlights">
+                {study.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </section>
+
+            {study.externalHref ? (
+              <a className="case-study-cta" href={study.externalHref}>
+                {study.externalLabel} ↗
+              </a>
+            ) : null}
+
+            <nav className="related-projects" aria-label="Related projects">
+              <h2>More projects</h2>
+              <ul>
+                {relatedStudies.map((relatedStudy) => (
+                  <li key={relatedStudy.slug}>
+                    <a href={`/projects/${relatedStudy.slug}/`}>{relatedStudy.name}</a>
+                    <span>{relatedStudy.year}</span>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </article>
+        </main>
+
+        <footer className="site-footer">
+          <p>
+            Based in Abu Dhabi. Want to collaborate,{' '}
+            <a href="mailto:smaffan21@gmail.com">let’s talk</a>.
+          </p>
+          <nav className="footer-socials" aria-label="Contact and social links">
+            {socialLinks.map((link) => (
+              <a href={link.href} key={link.label} aria-label={link.label} title={link.label}>
+                <SocialIcon name={link.icon} />
+              </a>
+            ))}
+          </nav>
+        </footer>
       </div>
+    </>
+  );
+}
+
+function App({ path = '/' }: { path?: string }) {
+  const caseStudy = getCaseStudy(path);
+
+  if (caseStudy) {
+    return <CaseStudyPage study={caseStudy} />;
+  }
+
+  return (
+    <>
+      <Background />
 
       <div className="page-shell">
         <a className="skip-link" href="#content">
           Skip to content
         </a>
 
-      <header className="site-header">
-        <div className="brand-mark" aria-hidden="true">
-          <img src="/me.png" alt="" />
-        </div>
-      </header>
+      <header className="site-header" aria-hidden="true" />
 
       <main id="content" tabIndex={-1}>
         <section className="intro" aria-labelledby="intro-title">
-          <h1 id="intro-title">Hello, I&apos;m Syed Affan.</h1>
+          <h1 id="intro-title">Hello, I&apos;m Syed M. Affan.</h1>
           <p className="intro-copy">
             I&apos;m a full-stack AI developer at{' '}
             <a className="intro-link" href="https://www.uventure.net/">KUEC</a>. These days,
