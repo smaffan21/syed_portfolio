@@ -16,7 +16,7 @@ type PortfolioItem = {
 const projects: PortfolioItem[] = [
   {
     name: 'Notch',
-    year: 'April 2026 to current',
+    year: 'April 2026 to present',
     description:
       'A cross-platform AI teleprompter with offline voice-following and privacy-first local processing, scaled to 1,500+ trial downloads and 100+ paying users.',
     href: '/projects/notch/',

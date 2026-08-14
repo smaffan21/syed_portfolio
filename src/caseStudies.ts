@@ -15,7 +15,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'notch',
     name: 'Notch',
-    year: '2026 to current',
+    year: 'April 2026 to present',
     summary:
       'A cross-platform AI teleprompter with offline voice-following and privacy-first local processing.',
     overview: [
