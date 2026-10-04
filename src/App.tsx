@@ -150,7 +150,7 @@ const experience: PortfolioItem[] = [
     year: 'Jul 2025 to present',
     description:
       'Building AI-native solutions across Khalifa University Enterprises Company, leading product and development from UVenture to internal tooling and client engagements.',
-    href: 'https://www.uventure.net/',
+    href: 'https://kuec.ae/',
     details: [
       'Lead product and development for AI-native solutions at KUEC, owning the path from discovery and architecture to build, QA, pilot, and demo.',
       'Flagship work is UVenture, a national research commercialization platform built with a six-person team and now in pilot-stage UAT with Khalifa University and MOHESR.',
@@ -690,7 +690,7 @@ function App() {
           <h1 id="intro-title">Hello, I&apos;m Syed M. Affan.</h1>
           <p className="intro-copy">
             I&apos;m a product-facing full-stack AI developer at{' '}
-            <a className="intro-link" href="https://www.uventure.net/">KUEC</a>. These days,
+            <a className="intro-link" href="https://kuec.ae/">KUEC</a>. These days,
             I&apos;m also building{' '}
             <a className="intro-link" href="https://trynotch.net/">Notch</a>, and
             running <a className="intro-link" href="https://socia.ae/">Socia</a>, on a mission
