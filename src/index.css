@@ -289,6 +289,71 @@ h1 {
   padding-top: 12px;
 }
 
+.item-title {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 10px;
+}
+
+.item-logo {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.item-logo-text {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1;
+}
+
+.item-shot {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.item-shot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.lightbox {
+  width: min(1200px, 94vw);
+  max-width: none;
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0b0c0a;
+  cursor: zoom-out;
+}
+
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.82);
+}
+
+.lightbox img {
+  display: block;
+  width: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+}
+
 .item-shots img {
   width: 100%;
   aspect-ratio: 16 / 10;

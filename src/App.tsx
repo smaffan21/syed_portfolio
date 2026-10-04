@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import Grainient from '@/components/Grainient';
 
 type PortfolioItem = {
@@ -11,6 +11,8 @@ type PortfolioItem = {
     src: string;
     alt: string;
   };
+  logo?: string;
+  logoText?: string;
   details?: string[];
   shots?: {
     src: string;
@@ -22,6 +24,7 @@ type PortfolioItem = {
 const projects: PortfolioItem[] = [
   {
     name: 'Notch',
+    logo: '/Pictures/projects/notch-logo.png',
     year: 'April 2026 to present',
     description:
       'A workspace for meetings, presentations, and demos: a voice-following teleprompter plus recording, editing, and recaps, with 1,500+ trial downloads and 100+ paying users.',
@@ -41,6 +44,7 @@ const projects: PortfolioItem[] = [
   },
   {
     name: 'UVenture',
+    logo: '/Pictures/projects/uventure-logo.png',
     year: 'Jul 2025 to present',
     description:
       'A national AI platform that carries university research from invention disclosure to commercialization for five stakeholder groups, now in pilot UAT with Khalifa University and MOHESR.',
@@ -58,13 +62,14 @@ const projects: PortfolioItem[] = [
   },
   {
     name: 'Modulus',
+    logo: '/Pictures/projects/modulus-logo.png',
     year: '2025',
     description:
-      'An autonomous data scientist: give it a dataset and a five-stage agentic pipeline plans, codes, tunes, and evaluates a model in under a minute, with reproducible code behind every result.',
+      'An autonomous data scientist built for the MBZUAI K2 Think hackathon: give it a dataset and a five-stage agentic pipeline plans, codes, tunes, and evaluates a model in under a minute, with reproducible code behind every result.',
     href:
       'https://drive.google.com/file/d/1xOYEo-DMH8QdfTcvBvgSZ-B3VS2OQKn2/view?usp=sharing',
     details: [
-      'Designed a five-stage agentic workflow (EDA, Plan, Synthesize, Train, Evaluate) coordinated by the K2-Think model.',
+      'Developed for the MBZUAI K2 Think hackathon, designing a five-stage agentic workflow (EDA, Plan, Synthesize, Train, Evaluate) coordinated by the K2-Think model.',
       'Optimized the full pipeline to under a minute, including LLM reasoning, a 20-trial Optuna hyperparameter search, and model training.',
       'Built a deterministic code-synthesis engine on Jinja2 templates so every generated ML script is reproducible and auditable.',
       'Streams progress to a Next.js interface over SSE and Redis, and generates EDA artifacts such as correlation heatmaps and distribution plots automatically.',
@@ -76,7 +81,8 @@ const projects: PortfolioItem[] = [
   },
   {
     name: 'Filly',
-    year: '2026',
+    logoText: 'F',
+    year: 'Coming soon',
     description:
       'A review-first Chrome extension that plans an entire job application in one pass, grounds every answer in your own evidence, and never clicks submit.',
     details: [
@@ -141,12 +147,14 @@ const experience: PortfolioItem[] = [
     name: 'Full-Stack AI Developer, KUEC',
     year: 'Jul 2025 to present',
     description:
-      'Leading a six-person team building an AI-powered research commercialization platform, now in pilot-stage UAT with Khalifa University and MOHESR.',
+      'Building AI-native solutions across Khalifa University Enterprises Company, leading product and development from UVenture to internal tooling and client engagements.',
     href: 'https://www.uventure.net/',
     details: [
-      'Own product and technical delivery for a national research commercialization platform, from system architecture and development to QA and stakeholder discovery.',
-      'Run pilot deployments and demonstrations, including discussions on multi-university adoption.',
-      'Built the AI layer for document intelligence, semantic search, prior-art support, research-to-partner matching, and decision-ready reports with RAG and vector search.',
+      'Lead product and development for AI-native solutions at KUEC, owning the path from discovery and architecture to build, QA, pilot, and demo.',
+      'Flagship work is UVenture, a national research commercialization platform built with a six-person team and now in pilot-stage UAT with Khalifa University and MOHESR.',
+      'Build internal tooling that automates and augments the team’s own workflows, and take on client engagements end to end, from requirements through delivery.',
+      'Run stakeholder discovery and turn requirements into product, including discussions on multi-university adoption.',
+      'Build the AI layer behind these products: document intelligence, semantic search, prior-art support, research-to-partner matching, and decision-ready reports using RAG and vector search.',
     ],
   },
   {
@@ -348,8 +356,39 @@ function SocialIcon({ name }: { name: SocialIconName }) {
   );
 }
 
+function Lightbox({
+  shot,
+  onClose,
+}: {
+  shot: NonNullable<PortfolioItem['shots']>[number];
+  onClose: () => void;
+}) {
+  const ref = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = ref.current;
+    if (dialog && !dialog.open) dialog.showModal();
+  }, []);
+
+  return (
+    <dialog
+      ref={ref}
+      className="lightbox"
+      aria-label={shot.alt}
+      onClose={onClose}
+      onClick={(event) => {
+        event.stopPropagation();
+        onClose();
+      }}
+    >
+      <img src={shot.src} alt={shot.alt} />
+    </dialog>
+  );
+}
+
 function ItemRow({ item }: { item: PortfolioItem }) {
   const [open, setOpen] = useState(false);
+  const [zoomed, setZoomed] = useState<NonNullable<PortfolioItem['shots']>[number] | null>(null);
   const expandable = Boolean(item.details?.length);
   const panelId = useId();
 
@@ -367,13 +406,22 @@ function ItemRow({ item }: { item: PortfolioItem }) {
       }
     >
       <div className="item-heading">
-        {item.href ? (
-          <a href={item.href} className="item-link">
-            {item.name}
-          </a>
-        ) : (
-          <span className="item-name">{item.name}</span>
-        )}
+        <span className="item-title">
+          {item.logo ? (
+            <img className="item-logo" src={item.logo} alt="" aria-hidden="true" />
+          ) : item.logoText ? (
+            <span className="item-logo item-logo-text" aria-hidden="true">
+              {item.logoText}
+            </span>
+          ) : null}
+          {item.href ? (
+            <a href={item.href} className="item-link">
+              {item.name}
+            </a>
+          ) : (
+            <span className="item-name">{item.name}</span>
+          )}
+        </span>
         <span className="item-year">{item.year}</span>
       </div>
       <p>
@@ -386,14 +434,21 @@ function ItemRow({ item }: { item: PortfolioItem }) {
         <div className="item-reveal item-reveal-shots">
           <div className="item-shots" style={{ ['--shots' as string]: item.shots.length }}>
             {item.shots.map((shot) => (
-              <img
+              <button
+                type="button"
+                className="item-shot"
                 key={shot.src}
-                src={shot.src}
-                alt={shot.alt}
-                className={shot.contain ? 'is-contain' : undefined}
-                loading="lazy"
-                decoding="async"
-              />
+                aria-label={`Enlarge: ${shot.alt}`}
+                onClick={() => setZoomed(shot)}
+              >
+                <img
+                  src={shot.src}
+                  alt={shot.alt}
+                  className={shot.contain ? 'is-contain' : undefined}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -418,6 +473,7 @@ function ItemRow({ item }: { item: PortfolioItem }) {
           </button>
         </>
       ) : null}
+      {zoomed ? <Lightbox shot={zoomed} onClose={() => setZoomed(null)} /> : null}
       {item.preview ? (
         <img
           className="item-preview"
