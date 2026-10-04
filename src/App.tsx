@@ -1,3 +1,4 @@
+import { useId, useState } from 'react';
 import Grainient from '@/components/Grainient';
 
 type PortfolioItem = {
@@ -10,6 +11,12 @@ type PortfolioItem = {
     src: string;
     alt: string;
   };
+  details?: string[];
+  shots?: {
+    src: string;
+    alt: string;
+    contain?: boolean;
+  }[];
 };
 
 const projects: PortfolioItem[] = [
@@ -17,50 +24,115 @@ const projects: PortfolioItem[] = [
     name: 'Notch',
     year: 'April 2026 to present',
     description:
-      'A cross-platform AI teleprompter with offline voice-following and privacy-first local processing, scaled to 1,500+ trial downloads and 100+ paying users.',
+      'A workspace for meetings, presentations, and demos: a voice-following teleprompter plus recording, editing, and recaps, with 1,500+ trial downloads and 100+ paying users.',
     href: 'https://trynotch.net/',
+    details: [
+      'Started as an offline, voice-following teleprompter (Electron, Vosk, TypeScript) and is growing into one connected workspace to prepare for, deliver, record, and revisit meetings, presentations, and demos.',
+      'The teleprompter stays the entry point. Writer turns rough notes into a script, screen recording captures the moment, a built-in editor handles auto-zoom, captions, and cuts, and Recap brings back what was said afterwards.',
+      'Privacy-first by design: voice-following and processing run locally, with no accounts or cloud dependency.',
+      'Built for people whose work is calls and follow-up, such as sales and account teams, customer success, educators, consultants, and team leads, and shaped by 1:1 customer discovery on positioning, UX, pricing, and roadmap.',
+      'Launched at a 24-hour virtual sprint run through Socia, then scaled to 1,500+ trial downloads and 100+ paying users.',
+    ],
+    shots: [
+      { src: '/Pictures/projects/notch-home.jpg', alt: 'Notch home screen with teleprompter, writer, recap, and recordings' },
+      { src: '/Pictures/projects/notch-editor.jpg', alt: 'Notch video editor with timeline, auto-zoom, and captions' },
+      { src: '/Pictures/projects/notch-teleprompter.jpg', alt: 'Notch teleprompter following a speaker’s voice', contain: true },
+    ],
   },
   {
     name: 'UVenture',
     year: 'Jul 2025 to present',
     description:
-      'A national AI platform that carries university research from invention disclosure through IP review, industry partnership, and commercialization, serving five stakeholder groups. Built end to end with a six-person team, with RAG-powered prior-art search and research-to-partner matching, now in pilot UAT with Khalifa University and MOHESR.',
+      'A national AI platform that carries university research from invention disclosure to commercialization for five stakeholder groups, now in pilot UAT with Khalifa University and MOHESR.',
     href: 'https://www.uventure.net/',
-  },
-  {
-    name: 'CDPCF',
-    year: '2026',
-    description:
-      'A cultural data provenance and compliance framework protecting intangible heritage from unauthorized use in AI training.',
+    details: [
+      'Leading a six-person team building a unified platform that moves research from idea and invention disclosure through IP review, industry collaboration, investment, and commercialization for five stakeholder groups.',
+      'Own end-to-end product and technical delivery across architecture, development, QA, stakeholder discovery, pilot deployments, and demos, including conversations on multi-university adoption.',
+      'Built AI capabilities for document intelligence, semantic search, prior-art support, missing-information detection, research-to-partner matching, and decision-ready reports using retrieval-augmented generation and vector search.',
+      'Now in pilot-stage user acceptance testing with Khalifa University and MOHESR.',
+    ],
+    shots: [
+      { src: '/Pictures/projects/uventure-dashboard.jpg', alt: 'UVenture researcher dashboard' },
+      { src: '/Pictures/projects/uventure-prior-art.jpg', alt: 'UVenture prior-art review for a technology transfer office' },
+    ],
   },
   {
     name: 'Modulus',
     year: '2025',
     description:
-      'A five-stage agentic data-science workflow that moves from exploratory analysis to model evaluation in under a minute.',
+      'An autonomous data scientist: give it a dataset and a five-stage agentic pipeline plans, codes, tunes, and evaluates a model in under a minute, with reproducible code behind every result.',
     href:
       'https://drive.google.com/file/d/1xOYEo-DMH8QdfTcvBvgSZ-B3VS2OQKn2/view?usp=sharing',
+    details: [
+      'Designed a five-stage agentic workflow (EDA, Plan, Synthesize, Train, Evaluate) coordinated by the K2-Think model.',
+      'Optimized the full pipeline to under a minute, including LLM reasoning, a 20-trial Optuna hyperparameter search, and model training.',
+      'Built a deterministic code-synthesis engine on Jinja2 templates so every generated ML script is reproducible and auditable.',
+      'Streams progress to a Next.js interface over SSE and Redis, and generates EDA artifacts such as correlation heatmaps and distribution plots automatically.',
+    ],
+    shots: [
+      { src: '/Pictures/projects/modulus-heatmap.jpg', alt: 'Correlation heatmap generated automatically by Modulus' },
+      { src: '/Pictures/projects/modulus-histograms.jpg', alt: 'Feature histograms generated automatically by Modulus' },
+    ],
+  },
+  {
+    name: 'Filly',
+    year: '2026',
+    description:
+      'A review-first Chrome extension that plans an entire job application in one pass, grounds every answer in your own evidence, and never clicks submit.',
+    details: [
+      'Matches exact profile values in code, then plans the whole form in one batch as typed actions: text, dropdown, radio, checkbox, file upload, skip, or needs review.',
+      'Resolves ambiguous fields against saved evidence and the options actually available on the page, and withholds any answer it cannot support.',
+      'Keeps the profile and documents local in IndexedDB, parses resumes into the profile, and never clicks final submit.',
+      'Ships with Meaning Find, a companion extension that searches a page by meaning and highlights the original passages.',
+      'Covered by 29 automated tests across evidence selection, uncertain choices, and relay security.',
+    ],
+    shots: [
+      { src: '/Pictures/projects/filly-popup.jpg', alt: 'Filly extension popup with Fill action and resume upload' },
+    ],
+  },
+  {
+    name: 'CDPCF',
+    year: '2026',
+    description:
+      'A cultural data provenance and compliance framework that protects intangible heritage from unauthorized AI training, placing 2nd at the UN Global SDG Public Policy Innovation Challenge out of 866 teams.',
+    details: [
+      'Designed a framework for tracing the provenance of cultural data and checking its use against compliance rules, so intangible heritage is not used in AI training without authorization.',
+      'Took 2nd place at the UN Global SDG Public Policy Innovation Challenge, representing the UAE in China as the Middle East’s only finalist out of 866 teams.',
+    ],
   },
   {
     name: 'UAVMS',
     year: '2025',
     description:
-      'Drone identity verification combining computer vision with indoor positioning, 90.5% mAP, and a 50,000+ image dataset.',
+      'Drone identity verification that fuses computer vision with indoor positioning, reaching 90.5% mAP on a 50,000+ image dataset.',
     href: 'https://uavms.vercel.app/',
+    details: [
+      'Combines computer vision with indoor positioning to verify drone identity.',
+      'Reached 90.5% mAP, trained and evaluated on a dataset of more than 50,000 images.',
+    ],
   },
   {
     name: 'F.A.L.C.O.N.',
     year: '2025',
     description:
-      'A YOLOv9 flood-mapping pipeline for satellite imagery and faster disaster-response planning.',
+      'A YOLOv9 flood-mapping pipeline that turns satellite imagery into faster disaster-response planning, winning 1st place among 14 teams.',
     href: 'https://www.canva.com/design/DAGgCawTGH8/reEiSTx2A2L76Y9IYZbNmA/view?utm_content=DAGgCawTGH8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h17cd0e311c',
+    details: [
+      'Built a YOLOv9 pipeline that maps flooded areas from satellite imagery.',
+      'Aimed at faster, better-informed disaster-response planning.',
+      'Won 1st place among 14 teams at the Zayed University Digital Transformation Hackathon.',
+    ],
   },
   {
     name: 'GreenCart',
     year: '2024',
     description:
-      'An AI-assisted sustainability scanner that turns product impact into practical shopping decisions.',
+      'An AI sustainability scanner that turns a product’s environmental impact into a better shopping decision, winning 1st place among 13 teams.',
     href: 'https://www.youtube.com/watch?v=3I6_HGFMFMQ&feature=youtu.be',
+    details: [
+      'An AI-assisted scanner that turns a product’s environmental impact into a practical shopping decision.',
+      'Won 1st place among 13 teams at the Smart Mobile Application Contest.',
+    ],
   },
 ];
 
@@ -69,8 +141,13 @@ const experience: PortfolioItem[] = [
     name: 'Full-Stack AI Developer, KUEC',
     year: 'Jul 2025 to present',
     description:
-      'Leading a six-person team building an AI-powered research commercialization platform now in pilot-stage UAT with Khalifa University and ATRC.',
+      'Leading a six-person team building an AI-powered research commercialization platform, now in pilot-stage UAT with Khalifa University and MOHESR.',
     href: 'https://www.uventure.net/',
+    details: [
+      'Own product and technical delivery for a national research commercialization platform, from system architecture and development to QA and stakeholder discovery.',
+      'Run pilot deployments and demonstrations, including discussions on multi-university adoption.',
+      'Built the AI layer for document intelligence, semantic search, prior-art support, research-to-partner matching, and decision-ready reports with RAG and vector search.',
+    ],
   },
   {
     name: 'Co-Founder & COO, Socia',
@@ -78,6 +155,12 @@ const experience: PortfolioItem[] = [
     description:
       'Co-founded and scaled a UAE-based hackathon community and builder network to 1,000+ builders across 70+ colleges, leading partnerships, programs, and events.',
     href: 'https://socia.ae/',
+    details: [
+      'Scaled the UAE’s fastest-growing hackathon network to 1,000+ builders across all seven emirates and 100+ institutions.',
+      'Closed and manage delivery of an eight-month paid engagement with the National MS Society UAE, building a letter-of-intent and grant management system into their legacy workflows.',
+      'Secured partnerships with Replit, 42 Abu Dhabi, and Odoo Middle East DMCC, running discovery calls, proposals, and design.',
+      'Ran a five-day Odoo bootcamp, a 250-application buildathon with 42 Abu Dhabi and Replit, and the 24-hour virtual sprint that launched Notch.',
+    ],
   },
   {
     name: 'Artificial Intelligence Lab Intern, Ab Ovo',
@@ -85,18 +168,32 @@ const experience: PortfolioItem[] = [
     description:
       'Built retrieval, semantic chunking, and embedding pipelines that turn railway legal documents into real-time B2B insight.',
     href: 'https://github.com/smaffan21/RAG-for-QA-and-BPMN-Generation',
+    details: [
+      'Built a RAG pipeline that turns legal documents into real-time B2B insight using vector databases and prompt engineering.',
+      'Experimented with instruction tuning and LoRA fine-tuning on Llama 3 variants for railway-domain fidelity.',
+      'Implemented semantic chunking and embedding pipelines, testing Hugging Face models along the way.',
+    ],
   },
   {
     name: 'Cybersecurity Undergraduate Research Fellow, Khalifa University',
     year: 'Oct 2024 to Feb 2025',
     description:
       'Applied and benchmarked hybrid transformer models for low-latency binary and multi-class intrusion detection.',
+    details: [
+      'Applied custom transformers to sequence classification on tabular data for low-latency intrusion detection.',
+      'Benchmarked hybrid transformer models against GLM, XGBoost, and Random Forest for binary and multi-class classification in vehicular environments.',
+      'Led to the HyTEN paper, published at IEEE IWCMC 2026.',
+    ],
   },
   {
     name: 'Software Engineering Intern, Siemens Industrial LLC',
     year: 'Jun to Aug 2024',
     description:
-      'Built a Python and JavaScript KPI automation tool that reduced customer-service data-processing time by 80%.',
+      'Built a Python and JavaScript KPI automation tool that cut customer-service data-processing time by 80%.',
+    details: [
+      'Built a Python and JavaScript KPI automation tool for customer-service data.',
+      'Cut data-processing time by 80%.',
+    ],
   },
 ];
 
@@ -251,42 +348,95 @@ function SocialIcon({ name }: { name: SocialIconName }) {
   );
 }
 
+function ItemRow({ item }: { item: PortfolioItem }) {
+  const [open, setOpen] = useState(false);
+  const expandable = Boolean(item.details?.length);
+  const panelId = useId();
+
+  return (
+    <li
+      className={`item${expandable ? ' item-expandable' : ''}${open ? ' is-open' : ''}`}
+      tabIndex={item.preview && !item.href ? 0 : undefined}
+      onClick={
+        expandable
+          ? (event) => {
+              if ((event.target as HTMLElement).closest('a, button')) return;
+              setOpen((value) => !value);
+            }
+          : undefined
+      }
+    >
+      <div className="item-heading">
+        {item.href ? (
+          <a href={item.href} className="item-link">
+            {item.name}
+          </a>
+        ) : (
+          <span className="item-name">{item.name}</span>
+        )}
+        <span className="item-year">{item.year}</span>
+      </div>
+      <p>
+        {item.highlight ? (
+          <strong className="item-highlight">{item.highlight}. </strong>
+        ) : null}
+        {item.description}
+      </p>
+      {item.shots ? (
+        <div className="item-reveal item-reveal-shots">
+          <div className="item-shots" style={{ ['--shots' as string]: item.shots.length }}>
+            {item.shots.map((shot) => (
+              <img
+                key={shot.src}
+                src={shot.src}
+                alt={shot.alt}
+                className={shot.contain ? 'is-contain' : undefined}
+                loading="lazy"
+                decoding="async"
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
+      {expandable ? (
+        <>
+          <div className="item-reveal item-reveal-details" id={panelId}>
+            <ul className="item-details">
+              {item.details!.map((detail) => (
+                <li key={detail}>{detail}</li>
+              ))}
+            </ul>
+          </div>
+          <button
+            type="button"
+            className="item-toggle"
+            aria-expanded={open}
+            aria-controls={panelId}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? 'Show less' : 'Show details'}
+          </button>
+        </>
+      ) : null}
+      {item.preview ? (
+        <img
+          className="item-preview"
+          src={item.preview.src}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : null}
+    </li>
+  );
+}
+
 function ItemList({ items }: { items: PortfolioItem[] }) {
   return (
     <ul className="item-list">
       {items.map((item) => (
-        <li
-          className="item"
-          key={item.name}
-          tabIndex={item.preview && !item.href ? 0 : undefined}
-        >
-          <div className="item-heading">
-            {item.href ? (
-              <a href={item.href} className="item-link">
-                {item.name}
-              </a>
-            ) : (
-              <span className="item-name">{item.name}</span>
-            )}
-            <span className="item-year">{item.year}</span>
-          </div>
-          <p>
-            {item.highlight ? (
-              <strong className="item-highlight">{item.highlight}. </strong>
-            ) : null}
-            {item.description}
-          </p>
-          {item.preview ? (
-            <img
-              className="item-preview"
-              src={item.preview.src}
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-            />
-          ) : null}
-        </li>
+        <ItemRow item={item} key={item.name} />
       ))}
     </ul>
   );
