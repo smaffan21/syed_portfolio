@@ -56,8 +56,9 @@ const projects: PortfolioItem[] = [
       'Now in pilot-stage user acceptance testing with Khalifa University and MOHESR.',
     ],
     shots: [
-      { src: '/Pictures/projects/uventure-dashboard.jpg', alt: 'UVenture researcher dashboard' },
-      { src: '/Pictures/projects/uventure-prior-art.jpg', alt: 'UVenture prior-art review for a technology transfer office' },
+      { src: '/Pictures/projects/uventure-landing.jpg', alt: 'UVenture landing page: From ideas to impact' },
+      { src: '/Pictures/projects/uventure-matches.jpg', alt: 'UVenture research matches with similarity, complementarity, and evidence scores' },
+      { src: '/Pictures/projects/uventure-equipment.jpg', alt: 'UVenture equipment catalogue for industry partners' },
     ],
   },
   {
