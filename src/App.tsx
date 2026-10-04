@@ -72,11 +72,12 @@ const projects: PortfolioItem[] = [
       'Developed for the MBZUAI K2 Think hackathon, designing a five-stage agentic workflow (EDA, Plan, Synthesize, Train, Evaluate) coordinated by the K2-Think model.',
       'Optimized the full pipeline to under a minute, including LLM reasoning, a 20-trial Optuna hyperparameter search, and model training.',
       'Built a deterministic code-synthesis engine on Jinja2 templates so every generated ML script is reproducible and auditable.',
-      'Streams progress to a Next.js interface over SSE and Redis, and generates EDA artifacts such as correlation heatmaps and distribution plots automatically.',
+      'Streams progress to a Next.js interface over SSE and Redis, and produces an evaluation report and a business dashboard from every run.',
     ],
     shots: [
-      { src: '/Pictures/projects/modulus-heatmap.jpg', alt: 'Correlation heatmap generated automatically by Modulus' },
-      { src: '/Pictures/projects/modulus-histograms.jpg', alt: 'Feature histograms generated automatically by Modulus' },
+      { src: '/Pictures/projects/modulus-pipeline.jpg', alt: 'Modulus pipeline progress showing each agent stage updating live' },
+      { src: '/Pictures/projects/modulus-report.jpg', alt: 'Modulus model evaluation report with performance metrics' },
+      { src: '/Pictures/projects/modulus-dashboard.jpg', alt: 'Modulus machine fleet health dashboard generated from the run' },
     ],
   },
   {
@@ -567,6 +568,37 @@ function Section({
   );
 }
 
+const gallery = [
+  { n: 1, ratio: 1.333, alt: 'Three friends holding cards at an evening Build It event' },
+  { n: 2, ratio: 1.5, alt: 'Presenting on stage at the NYUAD hackathon' },
+  { n: 3, ratio: 0.667, alt: 'In conversation during a networking session' },
+  { n: 4, ratio: 0.667, alt: 'Outside Etihad Arena in Abu Dhabi' },
+  { n: 5, ratio: 1.5, alt: 'A reflection photo outside a university building' },
+] as const;
+
+function Gallery() {
+  return (
+    <section className="gallery" aria-label="Photos">
+      <ul className="gallery-row">
+        {gallery.map(({ n, ratio, alt }) => (
+          <li key={n} style={{ ['--ratio' as string]: ratio }}>
+            <img
+              src={`/Pictures/gallery/gallery-${n}-480.webp`}
+              srcSet={`/Pictures/gallery/gallery-${n}-480.webp 480w, /Pictures/gallery/gallery-${n}-960.webp 960w`}
+              sizes="(min-width: 720px) 170px, 46vw"
+              width={480}
+              height={Math.round(480 / ratio)}
+              alt={alt}
+              loading="lazy"
+              decoding="async"
+            />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 function Background() {
   return (
     <div className="background-layer" aria-hidden="true">
@@ -629,6 +661,8 @@ function App() {
             Socia.
           </p>
         </section>
+
+        <Gallery />
 
         <Section icon="projects" title="Projects" items={projects} />
         <Section icon="work" title="Work" items={experience} />
