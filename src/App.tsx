@@ -99,6 +99,18 @@ const projects: PortfolioItem[] = [
     ],
   },
   {
+    name: 'Railway Document RAG',
+    year: '2025',
+    description:
+      'A retrieval-augmented pipeline that turns dense railway legal documents into question answering and BPMN process models, built during my AI lab internship at Ab Ovo.',
+    href: 'https://github.com/smaffan21/RAG-for-QA-and-BPMN-Generation',
+    details: [
+      'Built a RAG pipeline that converts legal documents into real-time B2B insight using vector databases and prompt engineering.',
+      'Implemented semantic chunking and embedding pipelines, testing Hugging Face models to improve retrieval quality.',
+      'Experimented with instruction tuning and LoRA fine-tuning on Llama 3 variants for railway-domain fidelity.',
+    ],
+  },
+  {
     name: 'CDPCF',
     year: '2026',
     description:
@@ -177,7 +189,7 @@ const experience: PortfolioItem[] = [
     year: 'May to Jul 2025',
     description:
       'Built retrieval, semantic chunking, and embedding pipelines that turn railway legal documents into real-time B2B insight.',
-    href: 'https://github.com/smaffan21/RAG-for-QA-and-BPMN-Generation',
+    href: 'https://www.ab-ovo.com/',
     details: [
       'Built a RAG pipeline that turns legal documents into real-time B2B insight using vector databases and prompt engineering.',
       'Experimented with instruction tuning and LoRA fine-tuning on Llama 3 variants for railway-domain fidelity.',
