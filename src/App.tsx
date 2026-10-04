@@ -358,19 +358,29 @@ function SocialIcon({ name }: { name: SocialIconName }) {
   );
 }
 
+type Shot = NonNullable<PortfolioItem['shots']>[number];
+
 function Lightbox({
-  shot,
+  shots,
+  start,
   onClose,
 }: {
-  shot: NonNullable<PortfolioItem['shots']>[number];
+  shots: Shot[];
+  start: number;
   onClose: () => void;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
+  const touchX = useRef<number | null>(null);
+  const [index, setIndex] = useState(start);
+  const shot = shots[index];
 
   useEffect(() => {
     const dialog = ref.current;
     if (dialog && !dialog.open) dialog.showModal();
   }, []);
+
+  const step = (delta: number) =>
+    setIndex((value) => Math.min(shots.length - 1, Math.max(0, value + delta)));
 
   return (
     <dialog
@@ -382,6 +392,19 @@ function Lightbox({
         event.stopPropagation();
         onClose();
       }}
+      onKeyDown={(event) => {
+        if (event.key === 'ArrowLeft') step(-1);
+        if (event.key === 'ArrowRight') step(1);
+      }}
+      onTouchStart={(event) => {
+        touchX.current = event.touches[0].clientX;
+      }}
+      onTouchEnd={(event) => {
+        if (touchX.current === null) return;
+        const dx = event.changedTouches[0].clientX - touchX.current;
+        touchX.current = null;
+        if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+      }}
     >
       <img src={shot.src} alt={shot.alt} />
     </dialog>
@@ -390,7 +413,7 @@ function Lightbox({
 
 function ItemRow({ item }: { item: PortfolioItem }) {
   const [open, setOpen] = useState(false);
-  const [zoomed, setZoomed] = useState<NonNullable<PortfolioItem['shots']>[number] | null>(null);
+  const [zoomed, setZoomed] = useState<number | null>(null);
   const expandable = Boolean(item.details?.length);
   const panelId = useId();
 
@@ -435,13 +458,13 @@ function ItemRow({ item }: { item: PortfolioItem }) {
       {item.shots ? (
         <div className="item-reveal item-reveal-shots">
           <div className="item-shots" style={{ ['--shots' as string]: item.shots.length }}>
-            {item.shots.map((shot) => (
+            {item.shots.map((shot, shotIndex) => (
               <button
                 type="button"
                 className="item-shot"
                 key={shot.src}
                 aria-label={`Enlarge: ${shot.alt}`}
-                onClick={() => setZoomed(shot)}
+                onClick={() => setZoomed(shotIndex)}
               >
                 <img
                   src={shot.src}
@@ -475,7 +498,9 @@ function ItemRow({ item }: { item: PortfolioItem }) {
           </button>
         </>
       ) : null}
-      {zoomed ? <Lightbox shot={zoomed} onClose={() => setZoomed(null)} /> : null}
+      {zoomed !== null && item.shots ? (
+        <Lightbox shots={item.shots} start={zoomed} onClose={() => setZoomed(null)} />
+      ) : null}
       {item.preview ? (
         <img
           className="item-preview"
@@ -577,25 +602,42 @@ const gallery = [
   { n: 5, ratio: 1.5, alt: 'A reflection photo outside a university building' },
 ] as const;
 
+const gallerySlides: Shot[] = gallery.map(({ n, alt }) => ({
+  src: `/Pictures/gallery/gallery-${n}-full.webp`,
+  alt,
+}));
+
 function Gallery() {
+  const [zoomed, setZoomed] = useState<number | null>(null);
+
   return (
     <section className="gallery" aria-label="Photos">
       <ul className="gallery-row">
-        {gallery.map(({ n, ratio, alt }) => (
+        {gallery.map(({ n, ratio, alt }, index) => (
           <li key={n} style={{ ['--ratio' as string]: ratio }}>
-            <img
-              src={`/Pictures/gallery/gallery-${n}-480.webp`}
-              srcSet={`/Pictures/gallery/gallery-${n}-480.webp 480w, /Pictures/gallery/gallery-${n}-960.webp 960w`}
-              sizes="(min-width: 720px) 170px, 46vw"
-              width={480}
-              height={Math.round(480 / ratio)}
-              alt={alt}
-              loading="lazy"
-              decoding="async"
-            />
+            <button
+              type="button"
+              className="gallery-photo"
+              aria-label={`Enlarge: ${alt}`}
+              onClick={() => setZoomed(index)}
+            >
+              <img
+                src={`/Pictures/gallery/gallery-${n}-480.webp`}
+                srcSet={`/Pictures/gallery/gallery-${n}-480.webp 480w, /Pictures/gallery/gallery-${n}-960.webp 960w`}
+                sizes="(min-width: 720px) 170px, 46vw"
+                width={480}
+                height={Math.round(480 / ratio)}
+                alt={alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
           </li>
         ))}
       </ul>
+      {zoomed !== null ? (
+        <Lightbox shots={gallerySlides} start={zoomed} onClose={() => setZoomed(null)} />
+      ) : null}
     </section>
   );
 }
