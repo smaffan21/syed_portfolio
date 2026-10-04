@@ -24,7 +24,7 @@ const projects: PortfolioItem[] = [
     name: 'UVenture',
     year: 'Jul 2025 to present',
     description:
-      'An AI-powered research commercialization platform built with a six-person team, now in pilot-stage UAT with Khalifa University and ATRC.',
+      'A national AI platform that carries university research from invention disclosure through IP review, industry partnership, and commercialization, serving five stakeholder groups. Built end to end with a six-person team, with RAG-powered prior-art search and research-to-partner matching, now in pilot UAT with Khalifa University and MOHESR.',
     href: 'https://www.uventure.net/',
   },
   {
