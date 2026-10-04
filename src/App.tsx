@@ -18,7 +18,14 @@ const projects: PortfolioItem[] = [
     year: 'April 2026 to present',
     description:
       'A cross-platform AI teleprompter with offline voice-following and privacy-first local processing, scaled to 1,500+ trial downloads and 100+ paying users.',
-    href: 'https://socia.ae/products/notch/',
+    href: 'https://trynotch.net/',
+  },
+  {
+    name: 'UVenture',
+    year: 'Jul 2025 to present',
+    description:
+      'An AI-powered research commercialization platform built with a six-person team, now in pilot-stage UAT with Khalifa University and ATRC.',
+    href: 'https://www.uventure.net/',
   },
   {
     name: 'CDPCF',
@@ -401,10 +408,10 @@ function App() {
         <section className="intro" aria-labelledby="intro-title">
           <h1 id="intro-title">Hello, I&apos;m Syed M. Affan.</h1>
           <p className="intro-copy">
-            I&apos;m a full-stack AI developer at{' '}
+            I&apos;m a product-facing full-stack AI developer at{' '}
             <a className="intro-link" href="https://www.uventure.net/">KUEC</a>. These days,
             I&apos;m also building{' '}
-            <a className="intro-link" href="https://socia.ae/products/notch/">Notch</a>, and
+            <a className="intro-link" href="https://trynotch.net/">Notch</a>, and
             running <a className="intro-link" href="https://socia.ae/">Socia</a>, on a mission
             to curate the most active builder community in the UAE.
           </p>
@@ -413,7 +420,7 @@ function App() {
             <a className="personal-link" href="https://www.youtube.com/watch?v=U3Dp8hJp2_Y">
               short films
             </a>. I also love hackathons and now host them under{' '}
-            <a className="personal-link" href="https://socia.ae/">Socia</a>.
+            Socia.
           </p>
         </section>
 

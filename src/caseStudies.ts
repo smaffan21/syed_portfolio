@@ -28,7 +28,7 @@ export const caseStudies: CaseStudy[] = [
       'Offline voice-following',
       'Privacy-first local processing',
     ],
-    externalHref: 'https://socia.ae/products/notch/',
+    externalHref: 'https://trynotch.net/',
     externalLabel: 'Visit Notch',
   },
   {
