@@ -408,15 +408,15 @@ h1 {
 }
 
 .lightbox {
-  width: min(1200px, 94vw);
+  width: fit-content;
   max-width: none;
-  max-height: 92vh;
+  height: fit-content;
+  max-height: none;
   margin: auto;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
   border: 0;
-  border-radius: 6px;
-  background: #0b0c0a;
+  background: transparent;
   cursor: zoom-out;
   touch-action: pan-y pinch-zoom;
 }
@@ -427,8 +427,11 @@ h1 {
 
 .lightbox img {
   display: block;
-  width: 100%;
+  width: auto;
+  height: auto;
+  max-width: 94vw;
   max-height: 92vh;
+  border-radius: 6px;
   object-fit: contain;
 }
 
@@ -480,6 +483,19 @@ h1 {
 .item-toggle:hover,
 .item-toggle:focus-visible {
   color: var(--accent);
+}
+
+@media (hover: hover) {
+  .item-toggle {
+    opacity: 0;
+    transition: opacity 160ms ease, color 160ms ease;
+  }
+
+  .item:hover .item-toggle,
+  .item:focus-within .item-toggle,
+  .item.is-open .item-toggle {
+    opacity: 1;
+  }
 }
 
 .item-toggle::after {
