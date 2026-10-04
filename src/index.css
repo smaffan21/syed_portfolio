@@ -205,9 +205,6 @@ h1 {
   height: 100%;
   border-radius: 6px;
   object-fit: cover;
-  opacity: 0.72;
-  filter: grayscale(0.35);
-  transition: opacity 220ms ease, filter 220ms ease;
 }
 
 .gallery-photo {
@@ -222,14 +219,9 @@ h1 {
   cursor: zoom-in;
 }
 
+.gallery-photo:focus,
 .gallery-photo:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.gallery-row li:hover img {
-  opacity: 1;
-  filter: none;
+  outline: none;
 }
 
 @media (max-width: 719px) {
@@ -403,9 +395,16 @@ h1 {
   cursor: zoom-in;
 }
 
+.item-shot:focus,
 .item-shot:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: none;
+}
+
+.lightbox,
+.lightbox:focus,
+.lightbox:focus-visible,
+.lightbox img {
+  outline: none;
 }
 
 .lightbox {
@@ -415,7 +414,7 @@ h1 {
   margin: auto;
   padding: 0;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 6px;
   background: #0b0c0a;
   cursor: zoom-out;
