@@ -619,7 +619,7 @@ const gallery = [
 ] as const;
 
 const gallerySlides: Shot[] = gallery.map(({ n, alt }) => ({
-  src: `/Pictures/gallery/gallery-${n}-full.webp`,
+  src: `/Pictures/gallery/pic-${n}-full.webp`,
   alt,
 }));
 
@@ -641,13 +641,12 @@ function Gallery() {
                   onClick={() => setZoomed(index)}
                 >
                   <img
-                    src={`/Pictures/gallery/gallery-${n}-480.webp`}
-                    srcSet={`/Pictures/gallery/gallery-${n}-480.webp 480w, /Pictures/gallery/gallery-${n}-960.webp 960w`}
+                    src={`/Pictures/gallery/pic-${n}-480.webp`}
+                    srcSet={`/Pictures/gallery/pic-${n}-480.webp 480w, /Pictures/gallery/pic-${n}-960.webp 960w`}
                     sizes="200px"
                     width={480}
                     height={Math.round(480 / ratio)}
                     alt={copy === 1 ? '' : alt}
-                    loading={n > 5 ? 'lazy' : undefined}
                     decoding="async"
                   />
                 </button>
