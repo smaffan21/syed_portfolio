@@ -37,9 +37,9 @@ const projects: PortfolioItem[] = [
       'Launched at a 24-hour virtual sprint run through Socia, then scaled to 1,500+ trial downloads and 100+ paying users.',
     ],
     shots: [
-      { src: '/Pictures/projects/notch-home.jpg', alt: 'Notch home screen with teleprompter, writer, recap, and recordings' },
-      { src: '/Pictures/projects/notch-editor.jpg', alt: 'Notch video editor with timeline, auto-zoom, and captions' },
-      { src: '/Pictures/projects/notch-teleprompter.jpg', alt: 'Notch teleprompter following a speaker’s voice', contain: true },
+      { src: '/Pictures/projects/notch-home.webp', alt: 'Notch home screen with teleprompter, writer, recap, and recordings' },
+      { src: '/Pictures/projects/notch-editor.webp', alt: 'Notch video editor with timeline, auto-zoom, and captions' },
+      { src: '/Pictures/projects/notch-teleprompter.webp', alt: 'Notch teleprompter following a speaker’s voice', contain: true },
     ],
   },
   {
@@ -56,9 +56,9 @@ const projects: PortfolioItem[] = [
       'Now in pilot-stage user acceptance testing with Khalifa University and MOHESR.',
     ],
     shots: [
-      { src: '/Pictures/projects/uventure-landing.jpg', alt: 'UVenture landing page: From ideas to impact' },
-      { src: '/Pictures/projects/uventure-matches.jpg', alt: 'UVenture research matches with similarity, complementarity, and evidence scores' },
-      { src: '/Pictures/projects/uventure-equipment.jpg', alt: 'UVenture equipment catalogue for industry partners' },
+      { src: '/Pictures/projects/uventure-landing.webp', alt: 'UVenture landing page: From ideas to impact' },
+      { src: '/Pictures/projects/uventure-matches.webp', alt: 'UVenture research matches with similarity, complementarity, and evidence scores' },
+      { src: '/Pictures/projects/uventure-equipment.webp', alt: 'UVenture equipment catalogue for industry partners' },
     ],
   },
   {
@@ -76,9 +76,9 @@ const projects: PortfolioItem[] = [
       'Streams progress to a Next.js interface over SSE and Redis, and produces an evaluation report and a business dashboard from every run.',
     ],
     shots: [
-      { src: '/Pictures/projects/modulus-pipeline.jpg', alt: 'Modulus pipeline progress showing each agent stage updating live' },
-      { src: '/Pictures/projects/modulus-report.jpg', alt: 'Modulus model evaluation report with performance metrics' },
-      { src: '/Pictures/projects/modulus-dashboard.jpg', alt: 'Modulus machine fleet health dashboard generated from the run' },
+      { src: '/Pictures/projects/modulus-pipeline.webp', alt: 'Modulus pipeline progress showing each agent stage updating live' },
+      { src: '/Pictures/projects/modulus-report.webp', alt: 'Modulus model evaluation report with performance metrics' },
+      { src: '/Pictures/projects/modulus-dashboard.webp', alt: 'Modulus machine fleet health dashboard generated from the run' },
     ],
   },
   {
@@ -95,7 +95,7 @@ const projects: PortfolioItem[] = [
       'Covered by 29 automated tests across evidence selection, uncertain choices, and relay security.',
     ],
     shots: [
-      { src: '/Pictures/projects/filly-popup.jpg', alt: 'Filly extension popup with Fill action and resume upload' },
+      { src: '/Pictures/projects/filly-popup.webp', alt: 'Filly extension popup with Fill action and resume upload' },
     ],
   },
   {
@@ -236,7 +236,7 @@ const recognition: PortfolioItem[] = [
     description:
       'Represented the UAE in China as the Middle East\u2019s only finalist, selected from 866 teams and 4,000+ applicants across 100+ countries.',
     preview: {
-      src: '/Pictures/un-global-policy-award.jpg',
+      src: '/Pictures/un-global-policy-award.webp',
       alt: 'CDPCF team at the UN Global SDG Public Policy Innovation Challenge in China',
     },
   },
@@ -247,7 +247,7 @@ const recognition: PortfolioItem[] = [
     description: 'University category for Baian, selected from 40+ projects.',
     href: 'https://www.linkedin.com/posts/syed-m-affan_aepaesaenaetaepaezaepaes-abudhabi-hackathon-activity-7374321278989549568-ZsmF',
     preview: {
-      src: '/Pictures/baian-award.jpeg',
+      src: '/Pictures/baian-award.webp',
       alt: 'Baian team at the Congress of Arabic and Creative Industries',
     },
   },
@@ -258,7 +258,7 @@ const recognition: PortfolioItem[] = [
     description: 'Among 104 teams for Socia.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7297498834266394624/',
     preview: {
-      src: '/Pictures/nyuad-award.jpg',
+      src: '/Pictures/nyuad-award.webp',
       alt: "Socia team at the NYUAD Slush'D AI Hackathon",
     },
   },
@@ -269,7 +269,7 @@ const recognition: PortfolioItem[] = [
     description: 'Among 14 teams for F.A.L.C.O.N.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7302690855050448896/',
     preview: {
-      src: '/Pictures/zu-award.jpg',
+      src: '/Pictures/zu-award.webp',
       alt: 'F.A.L.C.O.N. team at the Zayed University Digital Transformation Hackathon',
     },
   },
@@ -280,7 +280,7 @@ const recognition: PortfolioItem[] = [
     description: 'Regional award for Scrap-E, an AI-assisted e-waste recycling concept.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7271764757626408960/',
     preview: {
-      src: '/Pictures/bcg-award.jpeg',
+      src: '/Pictures/bcg-award.webp',
       alt: 'Scrap-E team at the BCG Platinion Middle East Hackathon',
     },
   },
@@ -292,7 +292,7 @@ const recognition: PortfolioItem[] = [
       'Among 13 teams for GreenCart, an AI-powered sustainability scanner for more informed shopping.',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7256537674499416064/',
     preview: {
-      src: '/Pictures/smac-award.jpeg',
+      src: '/Pictures/smac-award.webp',
       alt: 'GreenCart team at the Smart Mobile Application Contest',
     },
   },
@@ -310,7 +310,7 @@ const recognition: PortfolioItem[] = [
     description:
       'Prototyped a gravity-fed mail sorting system with machine learning for automated mail processing.',
     preview: {
-      src: '/Pictures/epg-award.jpeg',
+      src: '/Pictures/epg-award.webp',
       alt: 'Team at the Emirates Post Group Logistics Unleashed Competition',
     },
   },
@@ -321,7 +321,7 @@ const recognition: PortfolioItem[] = [
     description:
       'Built Recycle Rush, a Unity and C# mobile game that teaches younger audiences about recycling and sustainability.',
     preview: {
-      src: '/Pictures/ku-egaming-1-award.jpg',
+      src: '/Pictures/ku-egaming-1-award.webp',
       alt: 'Recycle Rush award at the first KU Sustainability E-Gaming Competition',
     },
   },

@@ -100,7 +100,7 @@ const person = {
   name: 'Syed M. Affan',
   alternateName: 'Syed Affan',
   url: `${siteUrl}/`,
-  image: `${siteUrl}/me.png`,
+  image: `${siteUrl}/me.jpg`,
   email: 'mailto:smaffan21@gmail.com',
   jobTitle: 'Full-Stack AI Developer',
   homeLocation: {
