@@ -607,11 +607,17 @@ function Section({
 }
 
 const gallery = [
-  { n: 1, ratio: 1.333, alt: 'Three friends holding cards at an evening Build It event' },
-  { n: 2, ratio: 1.5, alt: 'Presenting on stage at the NYUAD hackathon' },
-  { n: 3, ratio: 0.667, alt: 'In conversation during a networking session' },
-  { n: 4, ratio: 0.667, alt: 'Outside Etihad Arena in Abu Dhabi' },
-  { n: 5, ratio: 1.5, alt: 'A reflection photo outside a university building' },
+  { n: 1, ratio: 1.5, alt: 'Speaking at the UN Global SDG Public Policy Innovation Challenge in China' },
+  { n: 2, ratio: 1.782, alt: 'Presenting at the AI Everything exhibition' },
+  { n: 3, ratio: 1.5, alt: 'Mentoring a participant at a hackathon' },
+  { n: 4, ratio: 1.5, alt: 'Speaking at TEDxKhalifa University' },
+  { n: 5, ratio: 1.776, alt: 'With the team in front of a Khalifa University display' },
+  { n: 6, ratio: 1.546, alt: 'Group photo at the NYUAD Hackathon' },
+  { n: 7, ratio: 1.333, alt: 'Three friends holding cards at an evening Build It event' },
+  { n: 8, ratio: 1.5, alt: 'Presenting on stage at the NYUAD hackathon' },
+  { n: 9, ratio: 0.667, alt: 'In conversation during a networking session' },
+  { n: 10, ratio: 0.667, alt: 'Outside Etihad Arena in Abu Dhabi' },
+  { n: 11, ratio: 1.5, alt: 'A reflection photo outside a university building' },
 ] as const;
 
 const gallerySlides: Shot[] = gallery.map(({ n, alt }) => ({
@@ -624,29 +630,34 @@ function Gallery() {
 
   return (
     <section className="gallery" aria-label="Photos">
-      <ul className="gallery-row">
-        {gallery.map(({ n, ratio, alt }, index) => (
-          <li key={n} style={{ ['--ratio' as string]: ratio }}>
-            <button
-              type="button"
-              className="gallery-photo"
-              aria-label={`Enlarge: ${alt}`}
-              onClick={() => setZoomed(index)}
-            >
-              <img
-                src={`/Pictures/gallery/gallery-${n}-480.webp`}
-                srcSet={`/Pictures/gallery/gallery-${n}-480.webp 480w, /Pictures/gallery/gallery-${n}-960.webp 960w`}
-                sizes="(min-width: 720px) 170px, 46vw"
-                width={480}
-                height={Math.round(480 / ratio)}
-                alt={alt}
-                loading="lazy"
-                decoding="async"
-              />
-            </button>
-          </li>
+      <div className="gallery-track">
+        {[0, 1].map((copy) => (
+          <ul className="gallery-row" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+            {gallery.map(({ n, ratio, alt }, index) => (
+              <li key={n} style={{ ['--ratio' as string]: ratio }}>
+                <button
+                  type="button"
+                  className="gallery-photo"
+                  aria-label={`Enlarge: ${alt}`}
+                  tabIndex={copy === 1 ? -1 : undefined}
+                  onClick={() => setZoomed(index)}
+                >
+                  <img
+                    src={`/Pictures/gallery/gallery-${n}-480.webp`}
+                    srcSet={`/Pictures/gallery/gallery-${n}-480.webp 480w, /Pictures/gallery/gallery-${n}-960.webp 960w`}
+                    sizes="200px"
+                    width={480}
+                    height={Math.round(480 / ratio)}
+                    alt={copy === 1 ? '' : alt}
+                    loading={n > 5 ? 'lazy' : undefined}
+                    decoding="async"
+                  />
+                </button>
+              </li>
+            ))}
+          </ul>
         ))}
-      </ul>
+      </div>
       {zoomed !== null ? (
         <Lightbox shots={gallerySlides} start={zoomed} onClose={() => setZoomed(null)} />
       ) : null}
