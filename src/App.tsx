@@ -17,7 +17,6 @@ type PortfolioItem = {
   shots?: {
     src: string;
     alt: string;
-    contain?: boolean;
   }[];
 };
 
@@ -39,7 +38,7 @@ const projects: PortfolioItem[] = [
     shots: [
       { src: '/Pictures/projects/notch-home.webp', alt: 'Notch home screen with teleprompter, writer, recap, and recordings' },
       { src: '/Pictures/projects/notch-editor.webp', alt: 'Notch video editor with timeline, auto-zoom, and captions' },
-      { src: '/Pictures/projects/notch-teleprompter.webp', alt: 'Notch teleprompter following a speaker’s voice', contain: true },
+      { src: '/Pictures/projects/notch-teleprompter.webp', alt: 'Notch teleprompter following a speaker’s voice' },
     ],
   },
   {
@@ -469,7 +468,7 @@ function ItemRow({ item }: { item: PortfolioItem }) {
       </p>
       {item.shots ? (
         <div className="item-reveal item-reveal-shots">
-          <div className="item-shots" style={{ ['--shots' as string]: item.shots.length }}>
+          <div className="item-shots">
             {item.shots.map((shot, shotIndex) => (
               <button
                 type="button"
@@ -481,7 +480,6 @@ function ItemRow({ item }: { item: PortfolioItem }) {
                 <img
                   src={shot.src}
                   alt={shot.alt}
-                  className={shot.contain ? 'is-contain' : undefined}
                   loading="lazy"
                   decoding="async"
                 />
@@ -702,10 +700,6 @@ function App() {
       <Background />
 
       <div className="page-shell">
-        <a className="skip-link" href="#content">
-          Skip to content
-        </a>
-
       <header className="site-header" aria-hidden="true" />
 
       <main id="content" tabIndex={-1}>
