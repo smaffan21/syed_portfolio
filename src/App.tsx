@@ -45,7 +45,7 @@ const projects: PortfolioItem[] = [
   {
     name: 'UVenture',
     logo: '/Pictures/projects/uventure-logo.png',
-    year: 'Jul 2025 to present',
+    year: 'April 2026 to present',
     description:
       'A national AI platform that carries university research from invention disclosure to commercialization for five stakeholder groups, now in pilot UAT with Khalifa University and MOHESR.',
     href: 'https://www.uventure.net/',
