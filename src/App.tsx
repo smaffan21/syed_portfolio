@@ -605,17 +605,17 @@ function Section({
 }
 
 const gallery = [
-  { n: 4, kind: 'hero', label: 'TEDx Khalifa University', pos: '72% 40%', alt: 'Speaking at TEDxKhalifa University' },
-  { n: 1, kind: 'small', label: 'UN SDG Challenge, China', pos: '55% 35%', alt: 'Speaking at the UN Global SDG Public Policy Innovation Challenge in China' },
-  { n: 7, kind: 'small', label: 'Socia', pos: '50% 40%', alt: 'Three friends holding Socia cards at an evening Build It event' },
-  { n: 2, kind: 'small', label: 'AI Everything', pos: '70% 40%', alt: 'Presenting at the AI Everything exhibition' },
-  { n: 5, kind: 'small', label: 'Khalifa University', pos: '50% 40%', alt: 'With the team in front of a Khalifa University display' },
-  { n: 9, kind: 'tall', label: '', pos: '50% 40%', alt: 'In conversation during a networking session' },
-  { n: 10, kind: 'tall', label: '', pos: '50% 55%', alt: 'Outside Etihad Arena in Abu Dhabi' },
-  { n: 3, kind: 'small', label: '', pos: '50% 40%', alt: 'Mentoring a participant at a hackathon' },
-  { n: 8, kind: 'small', label: '', pos: '50% 50%', alt: 'Presenting on stage at the NYUAD hackathon' },
-  { n: 6, kind: 'small', label: 'NYUAD Hackathon', pos: '50% 50%', alt: 'Group photo at the NYUAD Hackathon' },
-  { n: 11, kind: 'small', label: '', pos: '50% 50%', alt: 'A reflection photo outside a university building' },
+  { n: 4, kind: 'hero', pos: '72% 40%', alt: 'Speaking at TEDxKhalifa University' },
+  { n: 1, kind: 'small', pos: '55% 35%', alt: 'Speaking at the UN Global SDG Public Policy Innovation Challenge in China' },
+  { n: 7, kind: 'small', pos: '50% 40%', alt: 'Three friends holding Socia cards at an evening Build It event' },
+  { n: 2, kind: 'small', pos: '70% 40%', alt: 'Presenting at the AI Everything exhibition' },
+  { n: 5, kind: 'small', pos: '50% 40%', alt: 'With the team in front of a Khalifa University display' },
+  { n: 9, kind: 'tall', pos: '50% 40%', alt: 'In conversation during a networking session' },
+  { n: 10, kind: 'tall', pos: '50% 55%', alt: 'Outside Etihad Arena in Abu Dhabi' },
+  { n: 3, kind: 'small', pos: '50% 40%', alt: 'Mentoring a participant at a hackathon' },
+  { n: 8, kind: 'small', pos: '50% 50%', alt: 'Presenting on stage at the NYUAD hackathon' },
+  { n: 6, kind: 'small', pos: '50% 50%', alt: 'Group photo at the NYUAD Hackathon' },
+  { n: 11, kind: 'small', pos: '50% 50%', alt: 'A reflection photo outside a university building' },
 ] as const;
 
 const gallerySlides: Shot[] = gallery.map(({ n, alt }) => ({
@@ -630,7 +630,7 @@ function Gallery() {
     <section className="gallery" aria-label="Photos">
       <div className="gallery-scroll">
         <div className="gallery-grid">
-          {gallery.map(({ n, kind, label, pos, alt }, index) => (
+          {gallery.map(({ n, kind, pos, alt }, index) => (
             <button
               type="button"
               className={`gallery-tile is-${kind}`}
@@ -648,7 +648,6 @@ function Gallery() {
                 style={{ objectPosition: pos }}
                 decoding="async"
               />
-              {label ? <span className="gallery-label">{label}</span> : null}
             </button>
           ))}
         </div>
