@@ -593,9 +593,29 @@ function Section({
   title: string;
   items: PortfolioItem[];
 }) {
+  const labelRef = useRef<HTMLDivElement>(null);
+  const [stuck, setStuck] = useState(false);
+
+  useEffect(() => {
+    const label = labelRef.current;
+    if (!label) return;
+    const update = () => {
+      const top = label.getBoundingClientRect().top;
+      const section = label.parentElement!.getBoundingClientRect();
+      setStuck(top <= 0.5 && section.top < 0 && section.bottom > top + label.offsetHeight);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
   return (
     <section className="section" aria-labelledby={`section-${icon}`}>
-      <div className="section-label">
+      <div className={`section-label${stuck ? ' is-stuck' : ''}`} ref={labelRef}>
         <SectionIcon name={icon} />
         <h2 id={`section-${icon}`}>{title}</h2>
       </div>
