@@ -711,11 +711,8 @@ function App() {
             to curate the most active builder community in the UAE.
           </p>
           <p className="intro-copy intro-copy-secondary">
-            Away from work, I play table tennis, vlog my experiences, and occasionally direct{' '}
-            <a className="personal-link" href="https://www.youtube.com/watch?v=U3Dp8hJp2_Y">
-              short films
-            </a>. I also love hackathons and now host them under{' '}
-            Socia.
+            Away from work, I play table tennis, vlog my experiences, and occasionally direct
+            short films. I also love hackathons and now host them under Socia.
           </p>
         </section>
 

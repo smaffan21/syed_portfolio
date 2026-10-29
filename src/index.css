@@ -126,11 +126,6 @@ h1 {
   text-decoration-color: rgba(42, 161, 241, 0.42);
 }
 
-.personal-link {
-  color: inherit;
-  text-decoration-line: underline;
-}
-
 .section + .section {
   margin-top: 112px;
 }
