@@ -233,8 +233,8 @@ const recognition: PortfolioItem[] = [
     year: '2026',
     highlight: 'Top 10 in AI',
     description:
-      'Named to the 2026 KT+150 list of the UAE’s most ambitious young innovators, as one of 10 honourees in the Artificial Intelligence category.',
-    href: 'https://www.khaleejtimes.com/uae/khaleej-times-kt150-list-uae-young-innovators',
+      'Selected for the KT+150 Class of 2026 as one of the UAE’s top 10 young innovators in Artificial Intelligence, for co-founding Notch and Socia.',
+    href: 'https://www.khaleejtimes.com/kt-plus/kt-150-list-2026-uae-young-entrepreneurs-innovators',
   },
   {
     name: 'UN Global SDG Public Policy Innovation Challenge',
