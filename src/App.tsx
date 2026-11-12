@@ -229,6 +229,14 @@ const education: PortfolioItem[] = [
 
 const recognition: PortfolioItem[] = [
   {
+    name: 'Khaleej Times KT+150',
+    year: '2026',
+    highlight: 'Top 10 in AI',
+    description:
+      'Named to the 2026 KT+150 list of the UAE’s most ambitious young innovators, as one of 10 honourees in the Artificial Intelligence category.',
+    href: 'https://www.khaleejtimes.com/uae/khaleej-times-kt150-list-uae-young-innovators',
+  },
+  {
     name: 'UN Global SDG Public Policy Innovation Challenge',
     year: '2026',
     highlight: '2nd place',
